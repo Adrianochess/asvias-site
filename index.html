@@ -1,199 +1,608 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ASVIAS - Projetos Rodoviários</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ASVIAS - Projetos Rodoviários</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
-<style>
-:root{
-  --azul-principal: #2E5FBF;
-  --grafite: #2F3E4D;
-  --cinza-texto: #6B7280;
-  --fundo-claro: #F4F6F8;
-  --branco: #FFFFFF;
-}
+  <style>
+    :root{
+      --brand-blue: #2E5FBF;     /* azul da logo */
+      --brand-graphite: #2F3E4D; /* grafite da logo */
+      --brand-gray: #6B7280;     /* cinza texto */
+      --bg: #F4F6F8;             /* fundo claro */
+      --card: #FFFFFF;
+      --dark: #0F172A;           /* azul bem escuro */
+      --border: rgba(47,62,77,.10);
+      --shadow: 0 14px 40px rgba(15, 23, 42, 0.10);
+      --shadow-soft: 0 10px 25px rgba(0,0,0,0.06);
+      --radius: 18px;
+      --container: 1120px;
+    }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+    *{ box-sizing: border-box; }
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--brand-graphite);
+    }
+    a{ color: inherit; text-decoration: none; }
+    img{ max-width: 100%; display:block; }
 
-body{
-  font-family:'Inter', sans-serif;
-  background:var(--fundo-claro);
-  color:var(--grafite);
-}
+    /* ====== Layout helpers ====== */
+    .container{
+      width: min(var(--container), calc(100% - 40px));
+      margin: 0 auto;
+    }
+    .pill{
+      display:inline-flex;
+      gap:10px;
+      align-items:center;
+      padding: 10px 14px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 999px;
+      color: rgba(255,255,255,.90);
+      background: rgba(255,255,255,.06);
+      backdrop-filter: blur(6px);
+      font-size: 13px;
+    }
 
-/* HEADER */
+    /* ====== Topbar / Navbar ====== */
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(15, 23, 42, .86);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,.10);
+    }
+    .nav{
+      height: 74px;
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      min-width: 220px;
+    }
+    .brand img{
+      width: 54px;
+      height: auto;
+      border-radius: 10px;
+    }
+    .brand .name{
+      line-height: 1.05;
+      color: #fff;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .brand .sub{
+      color: rgba(255,255,255,.70);
+      font-size: 12px;
+      font-weight: 500;
+    }
 
-header{
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-  color:white;
-  text-align:center;
-  padding:80px 20px;
-}
+    .navlinks{
+      display:flex;
+      gap: 18px;
+      align-items:center;
+    }
+    .navlinks a{
+      color: rgba(255,255,255,.80);
+      font-weight: 600;
+      font-size: 14px;
+      padding: 10px 10px;
+      border-radius: 10px;
+    }
+    .navlinks a:hover{
+      background: rgba(255,255,255,.08);
+      color: #fff;
+    }
 
-header img{
-  width:200px;
-  margin-bottom:25px;
-}
+    .navcta{
+      display:flex;
+      gap: 10px;
+      align-items:center;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 14px;
+      border: 1px solid transparent;
+      transition: transform .15s ease, filter .15s ease, background .15s ease;
+      white-space: nowrap;
+    }
+    .btn-primary{
+      background: var(--brand-blue);
+      color: #fff;
+      box-shadow: 0 14px 30px rgba(46,95,191,.30);
+    }
+    .btn-primary:hover{ transform: translateY(-2px); filter: brightness(1.05); }
+    .btn-ghost{
+      background: transparent;
+      border-color: rgba(255,255,255,.18);
+      color: rgba(255,255,255,.88);
+    }
+    .btn-ghost:hover{
+      background: rgba(255,255,255,.08);
+      color:#fff;
+    }
 
-header h1{
-  font-size:36px;
-  margin-bottom:15px;
-}
+    /* ====== Hero ====== */
+    .hero{
+      background:
+        radial-gradient(900px 500px at 10% 20%, rgba(46,95,191,.28), transparent 55%),
+        radial-gradient(900px 500px at 90% 10%, rgba(255,255,255,.10), transparent 55%),
+        linear-gradient(135deg, #0B1224 0%, #0F172A 60%, #0B1224 100%);
+      color: #fff;
+      padding: 66px 0 56px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 26px;
+      align-items: center;
+    }
+    .hero h1{
+      margin: 14px 0 14px;
+      font-size: clamp(30px, 3.2vw, 48px);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+    }
+    .hero p{
+      margin: 0 0 22px;
+      max-width: 720px;
+      color: rgba(255,255,255,.85);
+      font-size: 16px;
+      line-height: 1.65;
+    }
+    .hero-actions{
+      display:flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items:center;
+    }
 
-header p{
-  max-width:750px;
-  margin:0 auto;
-  font-size:17px;
-  line-height:1.6;
-  opacity:0.9;
-}
+    .hero-card{
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 24px 60px rgba(0,0,0,.25);
+      backdrop-filter: blur(10px);
+    }
+    .hero-card .logo-big{
+      width: 190px;
+      margin: 4px auto 12px;
+      filter: drop-shadow(0 16px 30px rgba(0,0,0,.35));
+    }
+    .hero-card .mini{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .stat{
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      border-radius: 14px;
+      padding: 12px;
+    }
+    .stat strong{
+      display:block;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+    }
+    .stat span{
+      display:block;
+      color: rgba(255,255,255,.78);
+      font-size: 12px;
+      margin-top: 2px;
+    }
 
-.btn{
-  display:inline-block;
-  margin-top:30px;
-  padding:14px 28px;
-  background:var(--azul-principal);
-  color:white;
-  text-decoration:none;
-  border-radius:8px;
-  font-weight:600;
-  transition:0.2s ease;
-}
+    /* ====== Sections ====== */
+    section{
+      padding: 64px 0;
+    }
+    .section-head{
+      display:flex;
+      align-items:flex-end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+    .kicker{
+      color: var(--brand-blue);
+      font-weight: 900;
+      letter-spacing: .08em;
+      font-size: 12px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    h2{
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: -0.02em;
+    }
+    .lead{
+      margin: 10px 0 0;
+      color: var(--brand-gray);
+      line-height: 1.7;
+      max-width: 680px;
+      font-size: 15px;
+    }
 
-.btn:hover{
-  transform:translateY(-2px);
-  background:#244fa5;
-}
+    .grid-3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
 
-/* SECTIONS */
+    .card{
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow-soft);
+    }
+    .card h3{
+      margin: 0 0 10px;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+    }
+    .card p{
+      margin: 0;
+      color: var(--brand-gray);
+      line-height: 1.65;
+      font-size: 14px;
+    }
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: rgba(46,95,191,.10);
+      color: var(--brand-blue);
+      border: 1px solid rgba(46,95,191,.20);
+      font-weight: 800;
+      font-size: 12px;
+      margin-bottom: 12px;
+    }
 
-section{
-  max-width:1100px;
-  margin:70px auto;
-  padding:0 20px;
-}
+    /* Portfolio */
+    .portfolio{
+      background: #fff;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .projects{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .project{
+      border-radius: var(--radius);
+      overflow:hidden;
+      border: 1px solid var(--border);
+      background: #fff;
+      box-shadow: var(--shadow-soft);
+      display:flex;
+      flex-direction: column;
+    }
+    .project .thumb{
+      height: 150px;
+      background:
+        radial-gradient(400px 180px at 20% 20%, rgba(46,95,191,.20), transparent 60%),
+        linear-gradient(135deg, #0F172A, #111827);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .project .body{
+      padding: 16px;
+    }
+    .project .body strong{
+      display:block;
+      margin-bottom: 6px;
+      letter-spacing: -0.01em;
+    }
+    .project .body span{
+      display:block;
+      color: var(--brand-gray);
+      font-size: 13px;
+      line-height: 1.5;
+    }
 
-h2{
-  margin-bottom:30px;
-  font-size:24px;
-}
+    /* CTA final */
+    .cta{
+      background:
+        radial-gradient(800px 380px at 10% 30%, rgba(46,95,191,.20), transparent 55%),
+        linear-gradient(135deg, #0B1224 0%, #0F172A 60%, #0B1224 100%);
+      color: #fff;
+      border-top: 1px solid rgba(255,255,255,.10);
+    }
+    .cta-box{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 26px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      border-radius: var(--radius);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 24px 60px rgba(0,0,0,.25);
+    }
+    .cta-box h3{
+      margin: 0 0 6px;
+      letter-spacing: -0.02em;
+      font-size: 20px;
+    }
+    .cta-box p{
+      margin: 0;
+      color: rgba(255,255,255,.82);
+      line-height: 1.6;
+      font-size: 14px;
+      max-width: 640px;
+    }
 
-.cards{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:25px;
-}
+    /* Footer */
+    footer{
+      background: var(--dark);
+      color: rgba(255,255,255,.85);
+      padding: 40px 0;
+    }
+    .footergrid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 18px;
+      align-items: start;
+    }
+    .footergrid strong{
+      color: #fff;
+      display:block;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+    .footergrid a{
+      color: rgba(255,255,255,.85);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+    .fine{
+      margin-top: 18px;
+      color: rgba(255,255,255,.55);
+      font-size: 12px;
+    }
 
-.card{
-  background:var(--branco);
-  padding:30px;
-  border-radius:14px;
-  box-shadow:0 10px 25px rgba(0,0,0,0.05);
-}
-
-.card h3{
-  margin-bottom:15px;
-  color:var(--azul-principal);
-}
-
-.card p{
-  color:var(--cinza-texto);
-  line-height:1.6;
-}
-
-/* FOOTER */
-
-footer{
-  background:#0f172a;
-  color:white;
-  text-align:center;
-  padding:40px 20px;
-  margin-top:60px;
-}
-
-footer p{
-  margin:6px 0;
-  opacity:0.9;
-}
-
-</style>
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .grid-3{ grid-template-columns: 1fr; }
+      .projects{ grid-template-columns: 1fr; }
+      .footergrid{ grid-template-columns: 1fr; }
+      .navlinks{ display:none; } /* simples (depois fazemos menu mobile) */
+      .brand{ min-width: unset; }
+    }
+  </style>
 </head>
 
 <body>
 
-<header>
-  <img src="LOGO.png" alt="ASVIAS Logo">
-  <h1>Conectando caminhos, projetando o futuro.</h1>
-  <p>
-    Projetos Rodoviários, Pavimentação e Georreferenciamento
-    com foco em conformidade DNIT/DER, viabilidade técnica e segurança jurídica.
-  </p>
-  <a class="btn" href="https://wa.me/55SEUNUMEROAQUI" target="_blank">
-    Solicitar Orçamento
-  </a>
-</header>
+  <!-- NAVBAR -->
+  <div class="topbar">
+    <div class="container nav">
+      <a class="brand" href="#inicio" aria-label="Ir para o início">
+        <img src="LOGO.png" alt="ASVIAS" />
+        <div>
+          <div class="name">ASVIAS</div>
+          <div class="sub">Engenharia • Projetos Viários</div>
+        </div>
+      </a>
 
-<section>
-  <h2>Serviços</h2>
-  <div class="cards">
+      <div class="navlinks" aria-label="Navegação">
+        <a href="#servicos">Serviços</a>
+        <a href="#portfolio">Portfólio</a>
+        <a href="#processo">Processo</a>
+        <a href="#contato">Contato</a>
+      </div>
 
-    <div class="card">
-      <h3>Acessos Rodoviários</h3>
-      <p>
-        Projetos completos conforme normas DNIT e DER, com estudos de tráfego,
-        geometria horizontal e vertical, drenagem e sinalização.
-      </p>
+      <div class="navcta">
+        <a class="btn btn-ghost" href="#portfolio">Ver projetos</a>
+        <!-- troque o número no final (formato: 55DDDNÚMERO) -->
+        <a class="btn btn-primary" href="https://wa.me/55SEUNUMEROAQUI" target="_blank" rel="noopener">Solicitar orçamento</a>
+      </div>
     </div>
-
-    <div class="card">
-      <h3>Pavimentação</h3>
-      <p>
-        Dimensionamento de pavimentos, drenagem urbana,
-        detalhamento executivo e quantitativos para obras públicas e privadas.
-      </p>
-    </div>
-
-    <div class="card">
-      <h3>Georreferenciamento</h3>
-      <p>
-        Levantamentos GNSS, regularização fundiária e
-        atendimento às normas do INCRA e cartórios.
-      </p>
-    </div>
-
   </div>
-</section>
 
-<section>
-  <h2>Diferenciais</h2>
-  <div class="cards">
+  <!-- HERO -->
+  <header class="hero" id="inicio">
+    <div class="container hero-grid">
+      <div>
+        <div class="pill">DNIT / DER • Concessionárias • Prefeituras</div>
+        <h1>Conectando caminhos, projetando o futuro.</h1>
+        <p>
+          A ASVIAS desenvolve projetos de acessos rodoviários, pavimentação e georreferenciamento
+          com foco em conformidade normativa, viabilidade técnica e segurança jurídica.
+        </p>
 
-    <div class="card">
-      ✔ Conformidade com normas técnicas e exigências regulatórias.
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://wa.me/55SEUNUMEROAQUI" target="_blank" rel="noopener">Falar no WhatsApp</a>
+          <a class="btn btn-ghost" href="#servicos">Conhecer serviços</a>
+        </div>
+      </div>
+
+      <div class="hero-card" aria-label="Resumo ASVIAS">
+        <img class="logo-big" src="LOGO.png" alt="Logo ASVIAS" />
+        <div class="mini">
+          <div class="stat">
+            <strong>Infraestrutura Viária</strong>
+            <span>Acessos, geometria, drenagem, sinalização</span>
+          </div>
+          <div class="stat">
+            <strong>Georreferenciamento</strong>
+            <span>GNSS, INCRA/SIGEF, regularização</span>
+          </div>
+          <div class="stat">
+            <strong>Pavimentação</strong>
+            <span>Dimensionamento e detalhamento executivo</span>
+          </div>
+          <div class="stat">
+            <strong>Conformidade</strong>
+            <span>Normas e exigências regulatórias</span>
+          </div>
+        </div>
+      </div>
     </div>
+  </header>
 
-    <div class="card">
-      ✔ Projetos compatibilizados e tecnicamente viáveis.
+  <!-- SERVIÇOS -->
+  <section id="servicos">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Serviços</div>
+          <h2>O que a ASVIAS entrega</h2>
+          <p class="lead">Projetos completos, documentação clara e foco em aprovação junto aos órgãos competentes.</p>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="tag">Acessos Rodoviários</div>
+          <h3>Projetos conforme DNIT/DER</h3>
+          <p>Geometria horizontal/vertical, drenagem, sinalização e compatibilização para atendimento a concessionárias e órgãos reguladores.</p>
+        </div>
+
+        <div class="card">
+          <div class="tag">Pavimentação</div>
+          <h3>Infraestrutura urbana e rural</h3>
+          <p>Dimensionamento de pavimentos, detalhamento executivo, memoriais e quantitativos para obras públicas e privadas.</p>
+        </div>
+
+        <div class="card">
+          <div class="tag">Georreferenciamento</div>
+          <h3>Regularização e base cadastral</h3>
+          <p>Levantamentos GNSS, produtos técnicos e documentação para INCRA/SIGEF, regularização fundiária e apoio cartorial.</p>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="card">
-      ✔ Experiência com órgãos públicos, concessionárias e setor privado.
+  <!-- PORTFÓLIO -->
+  <section class="portfolio" id="portfolio">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Portfólio</div>
+          <h2>Projetos e entregáveis</h2>
+          <p class="lead">Aqui vão alguns exemplos (você troca os títulos pelos seus projetos reais).</p>
+        </div>
+      </div>
+
+      <div class="projects">
+        <div class="project">
+          <div class="thumb" aria-hidden="true"></div>
+          <div class="body">
+            <strong>Projeto de Acesso Rodoviário</strong>
+            <span>Geometria, drenagem e sinalização • Conformidade normativa</span>
+          </div>
+        </div>
+
+        <div class="project">
+          <div class="thumb" aria-hidden="true"></div>
+          <div class="body">
+            <strong>Pavimentação e Drenagem Urbana</strong>
+            <span>Dimensionamento e detalhamento executivo • Quantitativos</span>
+          </div>
+        </div>
+
+        <div class="project">
+          <div class="thumb" aria-hidden="true"></div>
+          <div class="body">
+            <strong>Georreferenciamento de Imóvel Rural</strong>
+            <span>GNSS • Documentação INCRA/SIGEF • Regularização</span>
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
 
-  </div>
-</section>
+  <!-- PROCESSO -->
+  <section id="processo">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Processo</div>
+          <h2>Do briefing à aprovação</h2>
+          <p class="lead">Um fluxo objetivo para reduzir retrabalho e acelerar aprovações.</p>
+        </div>
+      </div>
 
-<footer>
-  <p>Francisco Beltrão - PR</p>
-  <p>ASVIAS Engenharia</p>
-</footer>
+      <div class="grid-3">
+        <div class="card">
+          <h3>1) Levantamento & dados</h3>
+          <p>Coleta de informações, alinhamento de escopo e requisitos (DNIT/DER, município, concessionária).</p>
+        </div>
+        <div class="card">
+          <h3>2) Estudo & proposta técnica</h3>
+          <p>Análise de viabilidade, soluções e cronograma com entregáveis claros.</p>
+        </div>
+        <div class="card">
+          <h3>3) Projeto & documentação</h3>
+          <p>Pranchas, memoriais, quantitativos, especificações e compatibilização.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- CTA FINAL -->
+  <section class="cta" id="contato">
+    <div class="container">
+      <div class="cta-box">
+        <div>
+          <h3>Quer uma proposta técnica para seu projeto?</h3>
+          <p>Me chame no WhatsApp e me diga: local, tipo de obra e objetivo (acesso, pavimentação ou georreferenciamento).</p>
+        </div>
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <a class="btn btn-ghost" href="#inicio">Voltar ao topo</a>
+          <a class="btn btn-primary" href="https://wa.me/55SEUNUMEROAQUI" target="_blank" rel="noopener">Solicitar orçamento</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container footergrid">
+      <div>
+        <strong>ASVIAS Engenharia</strong>
+        <div>Francisco Beltrão • PR</div>
+        <div class="fine">© <span id="year"></span> ASVIAS. Todos os direitos reservados.</div>
+      </div>
+      <div>
+        <strong>Contato</strong>
+        <div>WhatsApp: <a href="https://wa.me/55SEUNUMEROAQUI" target="_blank" rel="noopener">clicar para conversar</a></div>
+        <div class="fine">Troque “55SEUNUMEROAQUI” pelo seu número no código.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
