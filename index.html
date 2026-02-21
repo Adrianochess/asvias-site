@@ -67,7 +67,6 @@
       width: 52px;
       height: auto;
       border-radius: 10px;
-      /* se sua logo ainda tiver fundo branco, isso ajuda a “sumir” no topo */
       background: rgba(255,255,255,.06);
       padding: 6px;
     }
@@ -180,7 +179,6 @@
     .hero-card .logo{
       width: 220px;
       margin: 0 auto 12px;
-      /* se for transparente, fica lindo; se não for, esse fundo ajuda */
       background: rgba(255,255,255,.04);
       padding: 10px;
       border-radius: 14px;
@@ -329,6 +327,18 @@
 
 <body>
 
+  <!-- WhatsApp links (com mensagem pronta) -->
+  <!-- Formato correto: 55 + DDD + número -->
+  <!-- Seu número: (46) 99128-1462 => 5546991281462 -->
+  <script>
+    // Centraliza o link do WhatsApp em um só lugar (mais fácil de manter)
+    window.ASVIAS_WA = "https://wa.me/5546991281462?text=" + encodeURIComponent(
+      "Olá! Gostaria de solicitar uma proposta técnica. " +
+      "Serviço: (Acesso rodoviário / Pavimentação / Georreferenciamento). " +
+      "Local: _____. Prazo/observações: _____."
+    );
+  </script>
+
   <!-- NAV -->
   <div class="topbar">
     <div class="container nav">
@@ -349,7 +359,7 @@
 
       <div style="display:flex; gap:10px; align-items:center;">
         <a class="btn btn-ghost" href="#servicos">Ver serviços</a>
-        <a class="btn btn-primary" href="https://wa.me/55SEUNUMEROAQUI" target="_blank" rel="noopener">Solicitar proposta</a>
+        <a class="btn btn-primary" href="#" onclick="this.href=window.ASVIAS_WA" target="_blank" rel="noopener">Solicitar proposta</a>
       </div>
     </div>
   </div>
@@ -366,7 +376,7 @@
         </p>
 
         <div class="hero-actions">
-          <a class="btn btn-primary" href="https://wa.me/55SEUNUMEROAQUI" target="_blank" rel="noopener">Falar no WhatsApp</a>
+          <a class="btn btn-primary" href="#" onclick="this.href=window.ASVIAS_WA" target="_blank" rel="noopener">Falar no WhatsApp</a>
           <a class="btn btn-ghost" href="#conformidade">Ver conformidade</a>
         </div>
       </div>
@@ -533,11 +543,11 @@
           <p style="margin-bottom:12px;">📍 Francisco Beltrão • PR</p>
           <p style="margin-bottom:16px;">Clique para conversar:</p>
           <div style="display:flex; gap:10px; flex-wrap:wrap;">
-            <a class="btn btn-primary" href="https://wa.me/55SEUNUMEROAQUI" target="_blank" rel="noopener">WhatsApp</a>
+            <a class="btn btn-primary" href="#" onclick="this.href=window.ASVIAS_WA" target="_blank" rel="noopener">WhatsApp</a>
             <a class="btn btn-ghost" href="#inicio">Voltar ao topo</a>
           </div>
           <p style="margin-top:12px; color: var(--brand-gray); font-size: 12px;">
-            * Troque “55SEUNUMEROAQUI” pelo seu número no código.
+            WhatsApp: (46) 99128-1462
           </p>
         </div>
       </div>
