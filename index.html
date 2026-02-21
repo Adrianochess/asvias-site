@@ -11,16 +11,18 @@
 
   <style>
     :root{
-      --brand-blue: #2E5FBF;     /* azul da logo */
-      --brand-graphite: #2F3E4D; /* grafite da logo */
-      --brand-gray: #6B7280;     /* cinza texto */
-      --bg: #F4F6F8;             /* fundo claro */
+      /* Cores baseadas na sua logo */
+      --brand-blue: #2E5FBF;
+      --brand-graphite: #2F3E4D;
+      --brand-gray: #6B7280;
+
+      --dark: #0F172A;
+      --bg: #F4F6F8;
       --card: #FFFFFF;
-      --dark: #0F172A;           /* azul bem escuro */
-      --border: rgba(47,62,77,.10);
-      --shadow: 0 14px 40px rgba(15, 23, 42, 0.10);
-      --shadow-soft: 0 10px 25px rgba(0,0,0,0.06);
-      --radius: 18px;
+      --border: rgba(47,62,77,.12);
+      --shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+
+      --radius: 16px;
       --container: 1120px;
     }
 
@@ -32,87 +34,70 @@
       color: var(--brand-graphite);
     }
     a{ color: inherit; text-decoration: none; }
-    img{ max-width: 100%; display:block; }
+    img{ display:block; max-width:100%; }
 
-    /* ====== Layout helpers ====== */
     .container{
       width: min(var(--container), calc(100% - 40px));
       margin: 0 auto;
     }
-    .pill{
-      display:inline-flex;
-      gap:10px;
-      align-items:center;
-      padding: 10px 14px;
-      border: 1px solid rgba(255,255,255,.18);
-      border-radius: 999px;
-      color: rgba(255,255,255,.90);
-      background: rgba(255,255,255,.06);
-      backdrop-filter: blur(6px);
-      font-size: 13px;
-    }
 
-    /* ====== Topbar / Navbar ====== */
+    /* NAV */
     .topbar{
       position: sticky;
       top: 0;
       z-index: 999;
-      background: rgba(15, 23, 42, .86);
+      background: rgba(15, 23, 42, .92);
       backdrop-filter: blur(10px);
       border-bottom: 1px solid rgba(255,255,255,.10);
     }
     .nav{
-      height: 74px;
+      height: 76px;
       display:flex;
       align-items:center;
       justify-content: space-between;
-      gap: 18px;
+      gap: 16px;
     }
     .brand{
       display:flex;
       align-items:center;
       gap: 12px;
-      min-width: 220px;
+      min-width: 240px;
     }
     .brand img{
-      width: 54px;
+      width: 52px;
       height: auto;
       border-radius: 10px;
+      /* se sua logo ainda tiver fundo branco, isso ajuda a “sumir” no topo */
+      background: rgba(255,255,255,.06);
+      padding: 6px;
     }
     .brand .name{
-      line-height: 1.05;
-      color: #fff;
+      color:#fff;
       font-weight: 800;
       letter-spacing: -0.02em;
+      line-height: 1.1;
     }
     .brand .sub{
       color: rgba(255,255,255,.70);
       font-size: 12px;
-      font-weight: 500;
+      font-weight: 600;
+      margin-top: 2px;
     }
 
     .navlinks{
       display:flex;
-      gap: 18px;
       align-items:center;
+      gap: 6px;
     }
     .navlinks a{
-      color: rgba(255,255,255,.80);
-      font-weight: 600;
-      font-size: 14px;
-      padding: 10px 10px;
+      color: rgba(255,255,255,.78);
+      font-weight: 700;
+      font-size: 13px;
+      padding: 10px 12px;
       border-radius: 10px;
     }
-    .navlinks a:hover{
-      background: rgba(255,255,255,.08);
-      color: #fff;
-    }
+    .navlinks a:hover{ background: rgba(255,255,255,.08); color:#fff; }
 
-    .navcta{
-      display:flex;
-      gap: 10px;
-      align-items:center;
-    }
     .btn{
       display:inline-flex;
       align-items:center;
@@ -120,61 +105,69 @@
       padding: 12px 16px;
       border-radius: 12px;
       font-weight: 800;
-      font-size: 14px;
+      font-size: 13px;
       border: 1px solid transparent;
       transition: transform .15s ease, filter .15s ease, background .15s ease;
       white-space: nowrap;
     }
     .btn-primary{
       background: var(--brand-blue);
-      color: #fff;
-      box-shadow: 0 14px 30px rgba(46,95,191,.30);
+      color:#fff;
+      box-shadow: 0 14px 28px rgba(46,95,191,.24);
     }
-    .btn-primary:hover{ transform: translateY(-2px); filter: brightness(1.05); }
+    .btn-primary:hover{ transform: translateY(-1px); filter: brightness(1.03); }
     .btn-ghost{
       background: transparent;
       border-color: rgba(255,255,255,.18);
       color: rgba(255,255,255,.88);
     }
-    .btn-ghost:hover{
-      background: rgba(255,255,255,.08);
-      color:#fff;
-    }
+    .btn-ghost:hover{ background: rgba(255,255,255,.08); }
 
-    /* ====== Hero ====== */
-    .hero{
+    /* HERO institucional */
+    header.hero{
       background:
-        radial-gradient(900px 500px at 10% 20%, rgba(46,95,191,.28), transparent 55%),
-        radial-gradient(900px 500px at 90% 10%, rgba(255,255,255,.10), transparent 55%),
-        linear-gradient(135deg, #0B1224 0%, #0F172A 60%, #0B1224 100%);
-      color: #fff;
-      padding: 66px 0 56px;
+        linear-gradient(180deg, rgba(15,23,42,1) 0%, rgba(15,23,42,.95) 70%, rgba(15,23,42,.92) 100%);
+      color:#fff;
+      padding: 62px 0 52px;
       border-bottom: 1px solid rgba(255,255,255,.10);
     }
     .hero-grid{
       display:grid;
       grid-template-columns: 1.2fr .8fr;
-      gap: 26px;
+      gap: 22px;
       align-items: center;
     }
+    .eyebrow{
+      display:inline-flex;
+      gap: 10px;
+      align-items:center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.86);
+      font-weight: 700;
+      font-size: 12px;
+    }
     .hero h1{
-      margin: 14px 0 14px;
-      font-size: clamp(30px, 3.2vw, 48px);
-      line-height: 1.08;
+      margin: 14px 0 12px;
+      font-size: clamp(28px, 3vw, 44px);
+      line-height: 1.12;
       letter-spacing: -0.03em;
     }
     .hero p{
-      margin: 0 0 22px;
+      margin: 0 0 18px;
       max-width: 720px;
-      color: rgba(255,255,255,.85);
-      font-size: 16px;
+      color: rgba(255,255,255,.86);
       line-height: 1.65;
+      font-size: 15px;
     }
     .hero-actions{
       display:flex;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
       align-items:center;
+      margin-top: 12px;
     }
 
     .hero-card{
@@ -182,93 +175,82 @@
       border: 1px solid rgba(255,255,255,.14);
       border-radius: var(--radius);
       padding: 18px;
-      box-shadow: 0 24px 60px rgba(0,0,0,.25);
-      backdrop-filter: blur(10px);
+      box-shadow: 0 22px 60px rgba(0,0,0,.25);
     }
-    .hero-card .logo-big{
-      width: 190px;
-      margin: 4px auto 12px;
-      filter: drop-shadow(0 16px 30px rgba(0,0,0,.35));
+    .hero-card .logo{
+      width: 220px;
+      margin: 0 auto 12px;
+      /* se for transparente, fica lindo; se não for, esse fundo ajuda */
+      background: rgba(255,255,255,.04);
+      padding: 10px;
+      border-radius: 14px;
     }
-    .hero-card .mini{
+    .facts{
       display:grid;
       grid-template-columns: 1fr 1fr;
       gap: 10px;
-      margin-top: 12px;
+      margin-top: 10px;
     }
-    .stat{
+    .fact{
       border: 1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.06);
       border-radius: 14px;
       padding: 12px;
     }
-    .stat strong{
+    .fact strong{
       display:block;
-      font-size: 18px;
-      letter-spacing: -0.02em;
+      font-size: 14px;
+      letter-spacing: -0.01em;
     }
-    .stat span{
+    .fact span{
       display:block;
-      color: rgba(255,255,255,.78);
+      margin-top: 4px;
       font-size: 12px;
-      margin-top: 2px;
+      color: rgba(255,255,255,.78);
+      line-height: 1.4;
     }
 
-    /* ====== Sections ====== */
-    section{
-      padding: 64px 0;
-    }
+    /* Sections */
+    section{ padding: 62px 0; }
     .section-head{
+      margin-bottom: 18px;
       display:flex;
-      align-items:flex-end;
       justify-content: space-between;
+      align-items:flex-end;
       gap: 16px;
-      margin-bottom: 22px;
     }
     .kicker{
       color: var(--brand-blue);
       font-weight: 900;
-      letter-spacing: .08em;
+      letter-spacing: .10em;
       font-size: 12px;
       text-transform: uppercase;
       margin-bottom: 10px;
     }
     h2{
       margin: 0;
-      font-size: 28px;
+      font-size: 26px;
       letter-spacing: -0.02em;
     }
     .lead{
       margin: 10px 0 0;
       color: var(--brand-gray);
       line-height: 1.7;
-      max-width: 680px;
+      max-width: 720px;
       font-size: 15px;
     }
 
     .grid-3{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+      gap: 16px;
     }
-
     .card{
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 22px;
-      box-shadow: var(--shadow-soft);
-    }
-    .card h3{
-      margin: 0 0 10px;
-      font-size: 18px;
-      letter-spacing: -0.01em;
-    }
-    .card p{
-      margin: 0;
-      color: var(--brand-gray);
-      line-height: 1.65;
-      font-size: 14px;
+      box-shadow: var(--shadow);
     }
     .tag{
       display:inline-flex;
@@ -281,120 +263,65 @@
       border: 1px solid rgba(46,95,191,.20);
       font-weight: 800;
       font-size: 12px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
+    }
+    .card h3{
+      margin: 0 0 10px;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+      color: var(--brand-graphite);
+    }
+    .card p{
+      margin: 0;
+      color: var(--brand-gray);
+      line-height: 1.65;
+      font-size: 14px;
     }
 
-    /* Portfolio */
-    .portfolio{
+    .list{
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--brand-gray);
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    /* faixa institucional */
+    .band{
       background: #fff;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
     }
-    .projects{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-    .project{
-      border-radius: var(--radius);
-      overflow:hidden;
-      border: 1px solid var(--border);
-      background: #fff;
-      box-shadow: var(--shadow-soft);
-      display:flex;
-      flex-direction: column;
-    }
-    .project .thumb{
-      height: 150px;
-      background:
-        radial-gradient(400px 180px at 20% 20%, rgba(46,95,191,.20), transparent 60%),
-        linear-gradient(135deg, #0F172A, #111827);
-      border-bottom: 1px solid rgba(255,255,255,.08);
-    }
-    .project .body{
-      padding: 16px;
-    }
-    .project .body strong{
-      display:block;
-      margin-bottom: 6px;
-      letter-spacing: -0.01em;
-    }
-    .project .body span{
-      display:block;
-      color: var(--brand-gray);
-      font-size: 13px;
-      line-height: 1.5;
-    }
 
-    /* CTA final */
-    .cta{
-      background:
-        radial-gradient(800px 380px at 10% 30%, rgba(46,95,191,.20), transparent 55%),
-        linear-gradient(135deg, #0B1224 0%, #0F172A 60%, #0B1224 100%);
-      color: #fff;
-      border-top: 1px solid rgba(255,255,255,.10);
-    }
-    .cta-box{
-      display:flex;
-      align-items:center;
-      justify-content: space-between;
+    /* Contato */
+    .contact{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
       gap: 16px;
-      padding: 26px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      border-radius: var(--radius);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 24px 60px rgba(0,0,0,.25);
-    }
-    .cta-box h3{
-      margin: 0 0 6px;
-      letter-spacing: -0.02em;
-      font-size: 20px;
-    }
-    .cta-box p{
-      margin: 0;
-      color: rgba(255,255,255,.82);
-      line-height: 1.6;
-      font-size: 14px;
-      max-width: 640px;
+      align-items: start;
     }
 
     /* Footer */
     footer{
       background: var(--dark);
-      color: rgba(255,255,255,.85);
+      color: rgba(255,255,255,.86);
       padding: 40px 0;
     }
     .footergrid{
       display:grid;
       grid-template-columns: 1.2fr .8fr;
-      gap: 18px;
-      align-items: start;
+      gap: 16px;
     }
-    .footergrid strong{
-      color: #fff;
-      display:block;
-      margin-bottom: 8px;
-      letter-spacing: -0.01em;
-    }
-    .footergrid a{
-      color: rgba(255,255,255,.85);
-      text-decoration: underline;
-      text-underline-offset: 4px;
-    }
-    .fine{
-      margin-top: 18px;
-      color: rgba(255,255,255,.55);
-      font-size: 12px;
-    }
+    .footergrid strong{ color:#fff; display:block; margin-bottom: 8px; }
+    .fine{ margin-top: 16px; color: rgba(255,255,255,.55); font-size: 12px; }
 
     /* Responsive */
     @media (max-width: 980px){
+      .navlinks{ display:none; }
       .hero-grid{ grid-template-columns: 1fr; }
       .grid-3{ grid-template-columns: 1fr; }
-      .projects{ grid-template-columns: 1fr; }
+      .contact{ grid-template-columns: 1fr; }
       .footergrid{ grid-template-columns: 1fr; }
-      .navlinks{ display:none; } /* simples (depois fazemos menu mobile) */
       .brand{ min-width: unset; }
     }
   </style>
@@ -402,28 +329,27 @@
 
 <body>
 
-  <!-- NAVBAR -->
+  <!-- NAV -->
   <div class="topbar">
     <div class="container nav">
-      <a class="brand" href="#inicio" aria-label="Ir para o início">
+      <a class="brand" href="#inicio">
         <img src="LOGO.png" alt="ASVIAS" />
         <div>
           <div class="name">ASVIAS</div>
-          <div class="sub">Engenharia • Projetos Viários</div>
+          <div class="sub">Projetos Rodoviários • Infraestrutura</div>
         </div>
       </a>
 
-      <div class="navlinks" aria-label="Navegação">
+      <nav class="navlinks">
+        <a href="#atuacao">Atuação</a>
         <a href="#servicos">Serviços</a>
-        <a href="#portfolio">Portfólio</a>
-        <a href="#processo">Processo</a>
+        <a href="#conformidade">Conformidade</a>
         <a href="#contato">Contato</a>
-      </div>
+      </nav>
 
-      <div class="navcta">
-        <a class="btn btn-ghost" href="#portfolio">Ver projetos</a>
-        <!-- troque o número no final (formato: 55DDDNÚMERO) -->
-        <a class="btn btn-primary" href="https://wa.me/55SEUNUMEROAQUI" target="_blank" rel="noopener">Solicitar orçamento</a>
+      <div style="display:flex; gap:10px; align-items:center;">
+        <a class="btn btn-ghost" href="#servicos">Ver serviços</a>
+        <a class="btn btn-primary" href="https://wa.me/55SEUNUMEROAQUI" target="_blank" rel="noopener">Solicitar proposta</a>
       </div>
     </div>
   </div>
@@ -432,154 +358,187 @@
   <header class="hero" id="inicio">
     <div class="container hero-grid">
       <div>
-        <div class="pill">DNIT / DER • Concessionárias • Prefeituras</div>
-        <h1>Conectando caminhos, projetando o futuro.</h1>
+        <div class="eyebrow">DNIT / DER • Prefeituras • Concessionárias</div>
+        <h1>Projetos viários com precisão técnica e conformidade normativa.</h1>
         <p>
-          A ASVIAS desenvolve projetos de acessos rodoviários, pavimentação e georreferenciamento
-          com foco em conformidade normativa, viabilidade técnica e segurança jurídica.
+          A ASVIAS atua no desenvolvimento de projetos de acessos rodoviários, pavimentação e georreferenciamento,
+          com foco em viabilidade técnica, atendimento às exigências regulatórias e segurança jurídica.
         </p>
 
         <div class="hero-actions">
           <a class="btn btn-primary" href="https://wa.me/55SEUNUMEROAQUI" target="_blank" rel="noopener">Falar no WhatsApp</a>
-          <a class="btn btn-ghost" href="#servicos">Conhecer serviços</a>
+          <a class="btn btn-ghost" href="#conformidade">Ver conformidade</a>
         </div>
       </div>
 
-      <div class="hero-card" aria-label="Resumo ASVIAS">
-        <img class="logo-big" src="LOGO.png" alt="Logo ASVIAS" />
-        <div class="mini">
-          <div class="stat">
-            <strong>Infraestrutura Viária</strong>
-            <span>Acessos, geometria, drenagem, sinalização</span>
+      <aside class="hero-card" aria-label="Resumo">
+        <img class="logo" src="LOGO.png" alt="Logo ASVIAS" />
+        <div class="facts">
+          <div class="fact">
+            <strong>Acessos Rodoviários</strong>
+            <span>Geometria, drenagem, sinalização e aprovação</span>
           </div>
-          <div class="stat">
-            <strong>Georreferenciamento</strong>
-            <span>GNSS, INCRA/SIGEF, regularização</span>
-          </div>
-          <div class="stat">
+          <div class="fact">
             <strong>Pavimentação</strong>
-            <span>Dimensionamento e detalhamento executivo</span>
+            <span>Dimensionamento, detalhamento e quantitativos</span>
           </div>
-          <div class="stat">
-            <strong>Conformidade</strong>
-            <span>Normas e exigências regulatórias</span>
+          <div class="fact">
+            <strong>Georreferenciamento</strong>
+            <span>GNSS, INCRA/SIGEF e regularização</span>
+          </div>
+          <div class="fact">
+            <strong>Documentação</strong>
+            <span>Memoriais, pranchas e especificações</span>
           </div>
         </div>
-      </div>
+      </aside>
     </div>
   </header>
 
+  <!-- ATUAÇÃO -->
+  <section id="atuacao">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Atuação</div>
+          <h2>Engenharia com foco em aprovação e segurança jurídica</h2>
+          <p class="lead">
+            Projetos orientados por normas e requisitos dos órgãos competentes, com entregáveis claros para reduzir retrabalho e acelerar análises.
+          </p>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="tag">Normas e Órgãos</div>
+          <h3>DNIT / DER e exigências locais</h3>
+          <p>Atendimento a padrões técnicos, memorial descritivo e soluções compatíveis com a realidade da via e do entorno.</p>
+        </div>
+
+        <div class="card">
+          <div class="tag">Compatibilização</div>
+          <h3>Viabilidade e detalhamento executivo</h3>
+          <p>Projetos compatibilizados (geometria, drenagem, sinalização) e pranchas prontas para obra e análise técnica.</p>
+        </div>
+
+        <div class="card">
+          <div class="tag">Conformidade</div>
+          <h3>Documentação completa</h3>
+          <p>Escopo bem definido, entregáveis organizados e suporte para atendimento a exigências de concessionárias e prefeituras.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- SERVIÇOS -->
-  <section id="servicos">
+  <section class="band" id="servicos">
     <div class="container">
       <div class="section-head">
         <div>
           <div class="kicker">Serviços</div>
-          <h2>O que a ASVIAS entrega</h2>
-          <p class="lead">Projetos completos, documentação clara e foco em aprovação junto aos órgãos competentes.</p>
+          <h2>Serviços principais</h2>
+          <p class="lead">Atuação técnica em projetos viários e geoespaciais, com foco em clareza, norma e execução.</p>
         </div>
       </div>
 
       <div class="grid-3">
         <div class="card">
-          <div class="tag">Acessos Rodoviários</div>
-          <h3>Projetos conforme DNIT/DER</h3>
-          <p>Geometria horizontal/vertical, drenagem, sinalização e compatibilização para atendimento a concessionárias e órgãos reguladores.</p>
+          <div class="tag">Projetos Rodoviários</div>
+          <h3>Acessos e interseções</h3>
+          <p>Geometria horizontal e vertical, drenagem, sinalização e elementos de segurança viária.</p>
+          <ul class="list">
+            <li>Conformidade DNIT/DER</li>
+            <li>Compatibilização do projeto</li>
+            <li>Documentação para aprovação</li>
+          </ul>
         </div>
 
         <div class="card">
-          <div class="tag">Pavimentação</div>
-          <h3>Infraestrutura urbana e rural</h3>
-          <p>Dimensionamento de pavimentos, detalhamento executivo, memoriais e quantitativos para obras públicas e privadas.</p>
+          <div class="tag">Infraestrutura</div>
+          <h3>Pavimentação e drenagem</h3>
+          <p>Dimensionamento de pavimentos, detalhamento executivo e quantitativos para obras públicas e privadas.</p>
+          <ul class="list">
+            <li>Pavimentos (CBUQ, bases, etc.)</li>
+            <li>Drenagem e dispositivos</li>
+            <li>Memoriais e quantitativos</li>
+          </ul>
         </div>
 
         <div class="card">
-          <div class="tag">Georreferenciamento</div>
-          <h3>Regularização e base cadastral</h3>
-          <p>Levantamentos GNSS, produtos técnicos e documentação para INCRA/SIGEF, regularização fundiária e apoio cartorial.</p>
+          <div class="tag">Geoespacial</div>
+          <h3>Georreferenciamento</h3>
+          <p>Levantamentos GNSS, regularização fundiária e atendimento a INCRA/SIGEF e cartórios.</p>
+          <ul class="list">
+            <li>Produtos técnicos e memoriais</li>
+            <li>Organização documental</li>
+            <li>Apoio em regularização</li>
+          </ul>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PORTFÓLIO -->
-  <section class="portfolio" id="portfolio">
+  <!-- CONFORMIDADE -->
+  <section id="conformidade">
     <div class="container">
       <div class="section-head">
         <div>
-          <div class="kicker">Portfólio</div>
-          <h2>Projetos e entregáveis</h2>
-          <p class="lead">Aqui vão alguns exemplos (você troca os títulos pelos seus projetos reais).</p>
-        </div>
-      </div>
-
-      <div class="projects">
-        <div class="project">
-          <div class="thumb" aria-hidden="true"></div>
-          <div class="body">
-            <strong>Projeto de Acesso Rodoviário</strong>
-            <span>Geometria, drenagem e sinalização • Conformidade normativa</span>
-          </div>
-        </div>
-
-        <div class="project">
-          <div class="thumb" aria-hidden="true"></div>
-          <div class="body">
-            <strong>Pavimentação e Drenagem Urbana</strong>
-            <span>Dimensionamento e detalhamento executivo • Quantitativos</span>
-          </div>
-        </div>
-
-        <div class="project">
-          <div class="thumb" aria-hidden="true"></div>
-          <div class="body">
-            <strong>Georreferenciamento de Imóvel Rural</strong>
-            <span>GNSS • Documentação INCRA/SIGEF • Regularização</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROCESSO -->
-  <section id="processo">
-    <div class="container">
-      <div class="section-head">
-        <div>
-          <div class="kicker">Processo</div>
-          <h2>Do briefing à aprovação</h2>
-          <p class="lead">Um fluxo objetivo para reduzir retrabalho e acelerar aprovações.</p>
+          <div class="kicker">Conformidade</div>
+          <h2>Como garantimos consistência técnica</h2>
+          <p class="lead">Um processo objetivo para atender requisitos e evitar idas e vindas durante a análise.</p>
         </div>
       </div>
 
       <div class="grid-3">
         <div class="card">
-          <h3>1) Levantamento & dados</h3>
-          <p>Coleta de informações, alinhamento de escopo e requisitos (DNIT/DER, município, concessionária).</p>
+          <h3>1) Requisitos e escopo</h3>
+          <p>Levantamento de exigências (órgãos/concessionária/município) e definição clara dos entregáveis.</p>
         </div>
         <div class="card">
-          <h3>2) Estudo & proposta técnica</h3>
-          <p>Análise de viabilidade, soluções e cronograma com entregáveis claros.</p>
+          <h3>2) Estudos e soluções</h3>
+          <p>Alternativas técnicas, compatibilização e validações para reduzir riscos e inconsistências.</p>
         </div>
         <div class="card">
-          <h3>3) Projeto & documentação</h3>
-          <p>Pranchas, memoriais, quantitativos, especificações e compatibilização.</p>
+          <h3>3) Entrega e suporte</h3>
+          <p>Pranchas, memoriais, quantitativos e documentação organizada, com suporte para ajustes pontuais.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA FINAL -->
-  <section class="cta" id="contato">
+  <!-- CONTATO -->
+  <section class="band" id="contato">
     <div class="container">
-      <div class="cta-box">
+      <div class="section-head">
         <div>
-          <h3>Quer uma proposta técnica para seu projeto?</h3>
-          <p>Me chame no WhatsApp e me diga: local, tipo de obra e objetivo (acesso, pavimentação ou georreferenciamento).</p>
+          <div class="kicker">Contato</div>
+          <h2>Solicite uma proposta</h2>
+          <p class="lead">Envie local, objetivo e prazos. Respondemos com escopo e condições.</p>
         </div>
-        <div style="display:flex; gap:10px; flex-wrap:wrap;">
-          <a class="btn btn-ghost" href="#inicio">Voltar ao topo</a>
-          <a class="btn btn-primary" href="https://wa.me/55SEUNUMEROAQUI" target="_blank" rel="noopener">Solicitar orçamento</a>
+      </div>
+
+      <div class="contact">
+        <div class="card">
+          <h3>Como agilizar o atendimento</h3>
+          <p>Para retorno mais rápido, envie:</p>
+          <ul class="list">
+            <li>Cidade/trecho e referência do local</li>
+            <li>Tipo de serviço (acesso, pavimentação, geo)</li>
+            <li>Prazos e exigências do órgão</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>Fale conosco</h3>
+          <p style="margin-bottom:12px;">📍 Francisco Beltrão • PR</p>
+          <p style="margin-bottom:16px;">Clique para conversar:</p>
+          <div style="display:flex; gap:10px; flex-wrap:wrap;">
+            <a class="btn btn-primary" href="https://wa.me/55SEUNUMEROAQUI" target="_blank" rel="noopener">WhatsApp</a>
+            <a class="btn btn-ghost" href="#inicio">Voltar ao topo</a>
+          </div>
+          <p style="margin-top:12px; color: var(--brand-gray); font-size: 12px;">
+            * Troque “55SEUNUMEROAQUI” pelo seu número no código.
+          </p>
         </div>
       </div>
     </div>
@@ -590,13 +549,13 @@
     <div class="container footergrid">
       <div>
         <strong>ASVIAS Engenharia</strong>
-        <div>Francisco Beltrão • PR</div>
+        <div>Projetos Rodoviários • Pavimentação • Georreferenciamento</div>
         <div class="fine">© <span id="year"></span> ASVIAS. Todos os direitos reservados.</div>
       </div>
       <div>
-        <strong>Contato</strong>
-        <div>WhatsApp: <a href="https://wa.me/55SEUNUMEROAQUI" target="_blank" rel="noopener">clicar para conversar</a></div>
-        <div class="fine">Troque “55SEUNUMEROAQUI” pelo seu número no código.</div>
+        <strong>Atendimento</strong>
+        <div>Francisco Beltrão • PR</div>
+        <div class="fine">Conformidade • Viabilidade • Segurança jurídica</div>
       </div>
     </div>
   </footer>
