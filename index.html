@@ -4,102 +4,189 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ASVIAS - Projetos Rodoviários</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
-body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  background: #f4f6f8;
-  color: #1f2937;
+:root{
+  --azul-principal: #2E5FBF;
+  --grafite: #2F3E4D;
+  --cinza-texto: #6B7280;
+  --fundo-claro: #F4F6F8;
+  --branco: #FFFFFF;
 }
-header {
-  background: #0f172a;
-  color: white;
-  padding: 80px 20px;
-  text-align: center;
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
-header h1 {
-  font-size: 40px;
-  margin-bottom: 20px;
+
+body{
+  font-family:'Inter', sans-serif;
+  background:var(--fundo-claro);
+  color:var(--grafite);
 }
-header p {
-  font-size: 18px;
-  max-width: 700px;
-  margin: auto;
+
+/* HEADER */
+
+header{
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  color:white;
+  text-align:center;
+  padding:80px 20px;
 }
-.btn {
-  display: inline-block;
-  margin-top: 30px;
-  padding: 12px 24px;
-  background: #f97316;
-  color: white;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: 600;
+
+header img{
+  width:200px;
+  margin-bottom:25px;
 }
-section {
-  padding: 60px 20px;
-  max-width: 1100px;
-  margin: auto;
+
+header h1{
+  font-size:36px;
+  margin-bottom:15px;
 }
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 25px;
+
+header p{
+  max-width:750px;
+  margin:0 auto;
+  font-size:17px;
+  line-height:1.6;
+  opacity:0.9;
 }
-.card {
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+
+.btn{
+  display:inline-block;
+  margin-top:30px;
+  padding:14px 28px;
+  background:var(--azul-principal);
+  color:white;
+  text-decoration:none;
+  border-radius:8px;
+  font-weight:600;
+  transition:0.2s ease;
 }
-footer {
-  background: #0f172a;
-  color: white;
-  text-align: center;
-  padding: 40px 20px;
+
+.btn:hover{
+  transform:translateY(-2px);
+  background:#244fa5;
 }
+
+/* SECTIONS */
+
+section{
+  max-width:1100px;
+  margin:70px auto;
+  padding:0 20px;
+}
+
+h2{
+  margin-bottom:30px;
+  font-size:24px;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:25px;
+}
+
+.card{
+  background:var(--branco);
+  padding:30px;
+  border-radius:14px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.05);
+}
+
+.card h3{
+  margin-bottom:15px;
+  color:var(--azul-principal);
+}
+
+.card p{
+  color:var(--cinza-texto);
+  line-height:1.6;
+}
+
+/* FOOTER */
+
+footer{
+  background:#0f172a;
+  color:white;
+  text-align:center;
+  padding:40px 20px;
+  margin-top:60px;
+}
+
+footer p{
+  margin:6px 0;
+  opacity:0.9;
+}
+
 </style>
 </head>
+
 <body>
 
 <header>
-  <img src="logo.png" alt="ASVIAS Logo" style="width:180px; margin-bottom:20px;">
+  <img src="LOGO.png" alt="ASVIAS Logo">
   <h1>Conectando caminhos, projetando o futuro.</h1>
-  <p>Projetos Rodoviários, Pavimentação e Georreferenciamento com foco em conformidade DNIT/DER, viabilidade técnica e segurança jurídica.</p>
-  <a class="btn" href="https://wa.me/55SEUNUMEROAQUI" target="_blank">Solicitar Orçamento</a>
+  <p>
+    Projetos Rodoviários, Pavimentação e Georreferenciamento
+    com foco em conformidade DNIT/DER, viabilidade técnica e segurança jurídica.
+  </p>
+  <a class="btn" href="https://wa.me/55SEUNUMEROAQUI" target="_blank">
+    Solicitar Orçamento
+  </a>
 </header>
 
 <section>
   <h2>Serviços</h2>
   <div class="cards">
+
     <div class="card">
       <h3>Acessos Rodoviários</h3>
-      <p>Projetos completos conforme normas DNIT e DER, com estudos de tráfego, geometria, drenagem e sinalização.</p>
+      <p>
+        Projetos completos conforme normas DNIT e DER, com estudos de tráfego,
+        geometria horizontal e vertical, drenagem e sinalização.
+      </p>
     </div>
+
     <div class="card">
       <h3>Pavimentação</h3>
-      <p>Dimensionamento de pavimentos, drenagem urbana e detalhamento executivo para obras públicas e privadas.</p>
+      <p>
+        Dimensionamento de pavimentos, drenagem urbana,
+        detalhamento executivo e quantitativos para obras públicas e privadas.
+      </p>
     </div>
+
     <div class="card">
       <h3>Georreferenciamento</h3>
-      <p>Levantamentos GNSS, regularização fundiária e atendimento às normas do INCRA e cartórios.</p>
+      <p>
+        Levantamentos GNSS, regularização fundiária e
+        atendimento às normas do INCRA e cartórios.
+      </p>
     </div>
+
   </div>
 </section>
 
 <section>
   <h2>Diferenciais</h2>
   <div class="cards">
+
     <div class="card">
-      ✔ Conformidade com normas técnicas
+      ✔ Conformidade com normas técnicas e exigências regulatórias.
     </div>
+
     <div class="card">
-      ✔ Projetos compatibilizados
+      ✔ Projetos compatibilizados e tecnicamente viáveis.
     </div>
+
     <div class="card">
-      ✔ Experiência com órgãos públicos e concessionárias
+      ✔ Experiência com órgãos públicos, concessionárias e setor privado.
     </div>
+
   </div>
 </section>
 
