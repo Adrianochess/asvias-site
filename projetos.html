@@ -1,1 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projetos • AS Vias Engenharia</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* só desta página */
+    .project-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    .project-card{border:1px solid var(--border);border-radius:var(--radius);background:var(--card);overflow:hidden;transition:transform .12s ease,background .15s ease,border-color .15s ease}
+    .project-card:hover{transform:translateY(-2px);background:var(--card2);border-color:rgba(96,165,250,.25)}
+    .project-img{height:170px;background:
+      linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.55)),
+      url("https://images.unsplash.com/photo-1465446751832-9f10e0e76f1a?auto=format&fit=crop&w=1400&q=80") center/cover no-repeat}
+    .project-body{padding:14px 14px 16px}
+    .project-body h3{margin:0 0 6px;font-size:15px;letter-spacing:-.2px}
+    .project-body p{margin:0;color:var(--muted);font-size:13px}
+    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .chip{font-size:11px;color:rgba(255,255,255,.75);border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);padding:6px 10px;border-radius:999px}
+    @media (max-width: 980px){ .project-grid{grid-template-columns:1fr 1fr} }
+    @media (max-width: 640px){ .project-grid{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+
+<header class="header" id="siteHeader">
+  <div class="container">
+    <div class="header-inner">
+      <a class="brand" href="index.html"><img src="LOGO.png" alt="AS Vias Engenharia"/><div class="brand-title"><strong>AS Vias</strong><span>Engenharia</span></div></a>
+      <nav class="nav">
+        <a href="index.html">Início</a><a href="servicos.html">Serviços</a><a href="projetos.html">Projetos</a><a href="normas.html">Normas e ANTT</a><a href="sobre.html">Sobre</a><a href="contato.html">Contato</a>
+      </nav>
+      <div class="cta">
+        <a class="btn btn-ghost" href="servicos.html">Ver Serviços</a>
+        <a class="btn btn-primary" href="https://wa.me/5546991281462" target="_blank" rel="noreferrer">WhatsApp</a>
+      </div>
+      <button class="burger" id="openDrawer" aria-label="Abrir menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<div class="spacer"></div>
+<div class="drawer-overlay" id="drawerOverlay" aria-hidden="true"></div>
+<aside class="drawer" id="drawer" aria-label="Menu mobile">
+  <div class="drawer-head">
+    <div class="brand" style="min-width:auto;"><img src="LOGO.png" alt="AS Vias Engenharia"/><div class="brand-title"><strong>AS Vias</strong><span>Engenharia</span></div></div>
+    <button class="drawer-close" id="closeDrawer" aria-label="Fechar menu">✕</button>
+  </div>
+  <nav>
+    <a href="index.html">Início</a><a href="servicos.html">Serviços</a><a href="projetos.html">Projetos</a><a href="normas.html">Normas e ANTT</a><a href="sobre.html">Sobre</a><a href="contato.html">Contato</a>
+  </nav>
+  <a class="btn btn-primary" style="width:100%; margin-top:8px;" href="https://wa.me/5546991281462" target="_blank" rel="noreferrer">Falar no WhatsApp</a>
+</aside>
+
+<main>
+  <section class="pagehead">
+    <div class="container">
+      <h1>Projetos</h1>
+      <p>Alguns exemplos de atuação e tipos de entrega. Quando você selecionar suas fotos reais, a gente substitui as imagens destes cards.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="project-grid">
+
+        <article class="project-card">
+          <div class="project-img" title="Trocar por foto real"></div>
+          <div class="project-body">
+            <h3>Acesso Rodoviário</h3>
+            <p>Estudos, geometria e documentação para aprovação junto a órgão/concessionária.</p>
+            <div class="chips"><span class="chip">DNIT/DER</span><span class="chip">Drenagem</span><span class="chip">Sinalização</span></div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-img" style="background-image:
+            linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.55)),
+            url('https://images.unsplash.com/photo-1593062096033-9a26b3be98c2?auto=format&fit=crop&w=1400&q=80');"></div>
+          <div class="project-body">
+            <h3>Pavimentação Rural</h3>
+            <p>Soluções de pavimento, reforço e compatibilização com a realidade local.</p>
+            <div class="chips"><span class="chip">BGS/CBUQ</span><span class="chip">Quantitativos</span><span class="chip">Memorial</span></div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-img" style="background-image:
+            linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.55)),
+            url('https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?auto=format&fit=crop&w=1400&q=80');"></div>
+          <div class="project-body">
+            <h3>Infraestrutura Urbana</h3>
+            <p>Projetos de vias e drenagem com foco em execução e clareza técnica.</p>
+            <div class="chips"><span class="chip">Drenagem</span><span class="chip">Perfis/Seções</span><span class="chip">Plantas</span></div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-img" style="background-image:
+            linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.55)),
+            url('https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1400&q=80');"></div>
+          <div class="project-body">
+            <h3>Georreferenciamento</h3>
+            <p>Levantamento e peças técnicas para regularização conforme demanda do imóvel.</p>
+            <div class="chips"><span class="chip">INCRA/SIGEF</span><span class="chip">Memorial</span><span class="chip">Planta</span></div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-img" style="background-image:
+            linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.55)),
+            url('https://images.unsplash.com/photo-1465446751832-9f10e0e76f1a?auto=format&fit=crop&w=1400&q=80');"></div>
+          <div class="project-body">
+            <h3>Projeto para Aprovação</h3>
+            <p>Documentação organizada, checklist de entregáveis e suporte a ajustes.</p>
+            <div class="chips"><span class="chip">Conformidade</span><span class="chip">Escopo claro</span><span class="chip">Ajustes</span></div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="project-img" style="background-image:
+            linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.55)),
+            url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1400&q=80');"></div>
+          <div class="project-body">
+            <h3>Estudos Técnicos</h3>
+            <p>Leitura de cenário, restrições, alternativas e recomendações para decisão.</p>
+            <div class="chips"><span class="chip">Viabilidade</span><span class="chip">Normas</span><span class="chip">Parecer</span></div>
+          </div>
+        </article>
+
+      </div>
+
+      <div style="margin-top:14px;">
+        <a class="btn btn-primary" href="contato.html">Quero um orçamento</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="foot">
+        <div>© <span id="year"></span> AS Vias Engenharia</div>
+        <div style="display:flex; gap:14px; flex-wrap:wrap;">
+          <a href="servicos.html" style="color:var(--muted);">Serviços</a>
+          <a href="contato.html" style="color:var(--muted);">Contato</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</main>
+
+<script src="main.js"></script>
+</body>
+</html>
