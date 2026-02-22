@@ -66,6 +66,63 @@ img{ max-width:100%; display:block; }
   justify-content:space-between;
   gap: 34px;
 }
+
+/* ===== HEADER 2 LINHAS (logo grande) ===== */
+.header-inner.header-tall{
+  height: auto;                 /* ignora o height do .header-inner normal */
+  padding: 14px 0 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.header-top{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+/* logo grande */
+.brand img{
+  height: 150px;               /* ajuste aqui (150/170/190) */
+  width: auto;
+}
+
+/* menu na segunda linha */
+.nav.nav-row{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 46px;
+  padding-bottom: 6px;
+}
+
+.nav.nav-row a{
+  font-size: 18px;
+  font-weight: 600;
+  color: rgba(2,6,23,.72);
+}
+
+.nav.nav-row a:hover{
+  color: rgba(2,6,23,.95);
+}
+
+/* spacer precisa acompanhar header maior */
+.spacer{
+  height: 220px;               /* ajuste conforme altura da logo */
+}
+
+/* mobile: esconde menu linha 2 e mantém hamburger */
+@media (max-width: 860px){
+  .nav.nav-row{ display:none; }
+  .cta{ display:none; }
+  .burger{ display:inline-flex; }
+
+  .brand img{ height: 120px; }
+  .spacer{ height: 180px; }
+}
+
 .header::after{
   content:"";
   position:absolute;
