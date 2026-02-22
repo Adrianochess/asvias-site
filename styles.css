@@ -69,7 +69,7 @@ img{ max-width:100%; display:block; }
   gap:12px;
   min-width: 210px;
 }
-.brand img{ height:42px; width:auto; }
+.brand img{ height:54px; width:auto; }
 .brand-title{
   display:flex;
   flex-direction:column;
