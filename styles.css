@@ -106,16 +106,17 @@ img{ max-width:100%; display:block; }
 .nav{
   display:flex;
   align-items:center;
-  gap: 42px;                   /* mais espaço = mais premium */
+  gap: 55px;                   /* mais espaço = mais premium */
 }
 .nav a{
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
-  color: rgba(2,6,23,.70);
-  padding: 10px 2px;
+  color: rgba(2,6,23,.75);
   transition: color .15s ease;
 }
-.nav a:hover{ color: rgba(2,6,23,.92); }
+.nav a:hover{
+  color: rgba(2,6,23,.95);
+}
 
 .cta{
   display:flex;
@@ -128,10 +129,10 @@ img{ max-width:100%; display:block; }
   align-items:center;
   justify-content:center;
   gap:10px;
-  height: 42px;
-  padding: 0 14px;
-  border-radius: 14px;
-  font-size: 13px;
+  height: 52px;
+  padding: 0 24px;
+  border-radius: 16px;
+  font-size: 14px;
   font-weight: 700;
   border: 1px solid transparent;
   cursor:pointer;
