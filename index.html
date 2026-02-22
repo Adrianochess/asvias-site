@@ -3,654 +3,207 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ASVIAS - Projetos Rodoviários</title>
+  <title>AS Vias Engenharia • Projetos Rodoviários</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 
-  <style>
-    :root{
-      /* Dark minimal + azul (pode ajustar depois) */
-      --bg: #0b1220;              /* fundo principal (grafite azulado) */
-      --bg2:#0f172a;              /* variação */
-      --card: rgba(255,255,255,.04);
-      --card2: rgba(255,255,255,.06);
-      --border: rgba(255,255,255,.10);
-
-      --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.68);
-      --muted2: rgba(255,255,255,.55);
-
-      --blue: #2563eb;           /* destaque */
-      --blue2:#1e40af;           /* hover */
-      --blue3:#60a5fa;           /* detalhes leves */
-
-      --radius: 16px;
-      --shadow: 0 18px 50px rgba(0,0,0,.45);
-      --max: 1100px;
-    }
-
-    *{ box-sizing:border-box; }
-    html{ scroll-behavior:smooth; }
-    body{
-      margin:0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background:
-        radial-gradient(1200px 500px at 15% 0%, rgba(37,99,235,.22), transparent 55%),
-        radial-gradient(900px 480px at 85% 10%, rgba(96,165,250,.12), transparent 60%),
-        linear-gradient(180deg, var(--bg), var(--bg2));
-      color: var(--text);
-      line-height: 1.55;
-    }
-
-    a{ color:inherit; text-decoration:none; }
-    img{ max-width:100%; display:block; }
-
-    .container{
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 18px;
-    }
-
-    /* HEADER (auto-hide) */
-    .header{
-      position: fixed;
-      left:0; right:0; top:0;
-      z-index: 50;
-      border-bottom: 1px solid var(--border);
-      background: rgba(7,10,18,.62);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      transform: translateY(0);
-      transition: transform .28s ease;
-    }
-    .header.hide{ transform: translateY(-100%); }
-
-    .header-inner{
-      height: 68px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 14px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      min-width: 210px;
-    }
-    .brand img{ height:42px; width:auto; }
-    .brand-title{
-      display:flex;
-      flex-direction:column;
-      line-height:1.05;
-    }
-    .brand-title strong{ font-size: 14px; letter-spacing:.3px; }
-    .brand-title span{ font-size: 12px; color: var(--muted2); }
-
-    .nav{
-      display:flex;
-      align-items:center;
-      gap: 22px;
-    }
-    .nav a{
-      font-size: 13px;
-      color: var(--muted);
-      padding: 10px 2px;
-      transition: color .15s ease;
-    }
-    .nav a:hover{ color: var(--text); }
-
-    .cta{
-      display:flex;
-      align-items:center;
-      gap: 10px;
-    }
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      height: 42px;
-      padding: 0 14px;
-      border-radius: 14px;
-      font-size: 13px;
-      font-weight: 700;
-      border: 1px solid transparent;
-      cursor:pointer;
-      transition: transform .08s ease, background .15s ease, border-color .15s ease;
-      user-select:none;
-      white-space:nowrap;
-    }
-    .btn:active{ transform: scale(.98); }
-    .btn-primary{
-      background: var(--blue);
-      color: #fff;
-    }
-    .btn-primary:hover{ background: #2f6cff; }
-    .btn-ghost{
-      background: transparent;
-      border-color: rgba(255,255,255,.16);
-      color: var(--text);
-    }
-    .btn-ghost:hover{ border-color: rgba(255,255,255,.28); }
-
-    /* Mobile */
-    .burger{
-      display:none;
-      height:42px;
-      width:42px;
-      border-radius: 14px;
-      background: transparent;
-      border: 1px solid rgba(255,255,255,.16);
-      color: var(--text);
-      cursor:pointer;
-    }
-    .burger:hover{ border-color: rgba(255,255,255,.28); }
-
-    .drawer-overlay{
-      position:fixed;
-      inset:0;
-      background: rgba(0,0,0,.62);
-      z-index: 60;
-      display:none;
-    }
-    .drawer{
-      position:fixed;
-      right:0; top:0;
-      height:100%;
-      width:min(86%, 360px);
-      background: rgba(7,10,18,.94);
-      border-left: 1px solid var(--border);
-      z-index: 61;
-      transform: translateX(102%);
-      transition: transform .25s ease;
-      padding: 18px;
-    }
-    .drawer.open{ transform: translateX(0); }
-    .drawer-overlay.open{ display:block; }
-
-    .drawer-head{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 12px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border);
-    }
-    .drawer-close{
-      height:42px; width:42px;
-      border-radius: 14px;
-      background: transparent;
-      border: 1px solid rgba(255,255,255,.16);
-      color: var(--text);
-      cursor:pointer;
-    }
-    .drawer nav{
-      display:flex;
-      flex-direction:column;
-      gap: 6px;
-      padding: 14px 0;
-    }
-    .drawer nav a{
-      padding: 12px 12px;
-      border-radius: 14px;
-      color: var(--muted);
-      border: 1px solid transparent;
-    }
-    .drawer nav a:hover{
-      color: var(--text);
-      border-color: rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-    }
-
-    /* HERO */
-    .spacer{ height: 68px; } /* espaço para header fixo */
-
-    .hero{
-      padding: 64px 0 34px;
-    }
-    .hero-grid{
-      display:grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 26px;
-      align-items: center;
-    }
-    .kicker{
-      display:inline-flex;
-      gap:10px;
-      align-items:center;
-      color: var(--muted);
-      font-size: 12px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      padding: 8px 12px;
-      border-radius: 999px;
-      width: fit-content;
-    }
-    .dot{
-      width: 8px; height: 8px;
-      border-radius: 50%;
-      background: var(--blue3);
-      box-shadow: 0 0 0 4px rgba(96,165,250,.15);
-    }
-    h1{
-      margin: 14px 0 10px;
-      font-size: 42px;
-      line-height: 1.1;
-      letter-spacing: -0.6px;
-    }
-    .sub{
-      margin: 0 0 18px;
-      color: var(--muted);
-      font-size: 15px;
-      max-width: 58ch;
-    }
-    .hero-actions{
-      display:flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 6px;
-    }
-
-    .hero-card{
-      border: 1px solid var(--border);
-      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
-      border-radius: var(--radius);
-      overflow:hidden;
-      box-shadow: var(--shadow);
-    }
-    .hero-card .ph{
-      height: 260px;
-      background:
-        linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.55)),
-        url("https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
-      /* Troque depois por SUA foto real do topo (drone/rodovia) */
-    }
-    .hero-card .meta{
-      padding: 14px 14px 16px;
-    }
-    .meta strong{ display:block; font-size: 13px; }
-    .meta span{ display:block; font-size: 12px; color: var(--muted2); margin-top: 4px; }
-
-    /* SECTIONS */
-    section{ padding: 34px 0; }
-    .section-title{
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap: 14px;
-      margin-bottom: 18px;
-    }
-    .section-title h2{
-      margin:0;
-      font-size: 22px;
-      letter-spacing: -0.3px;
-    }
-    .section-title p{
-      margin:0;
-      color: var(--muted2);
-      font-size: 13px;
-      max-width: 60ch;
-    }
-
-    .cards{
-      display:grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-    }
-    .card{
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: var(--card);
-      padding: 16px;
-      transition: transform .12s ease, background .15s ease, border-color .15s ease;
-      min-height: 150px;
-    }
-    .card:hover{
-      transform: translateY(-2px);
-      background: var(--card2);
-      border-color: rgba(96,165,250,.25);
-    }
-    .card h3{
-      margin:0 0 8px;
-      font-size: 15px;
-      letter-spacing: -0.2px;
-    }
-    .card p{
-      margin:0;
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .tag{
-      display:inline-flex;
-      gap:8px;
-      align-items:center;
-      color: rgba(255,255,255,.75);
-      font-size: 12px;
-      margin-bottom: 10px;
-    }
-    .tag i{
-      width: 10px;
-      height: 10px;
-      border-radius: 3px;
-      background: rgba(37,99,235,.85);
-      box-shadow: 0 0 0 4px rgba(37,99,235,.12);
-      display:inline-block;
-    }
-
-    .split{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-
-    .panel{
-      border: 1px solid var(--border);
-      background: var(--card);
-      border-radius: var(--radius);
-      padding: 16px;
-    }
-    .panel p{ margin:0; color: var(--muted); font-size: 13px; }
-    .panel ul{
-      margin: 10px 0 0;
-      padding-left: 18px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .panel li{ margin: 6px 0; }
-
-    /* FOOTER */
-    footer{
-      padding: 26px 0 40px;
-      border-top: 1px solid var(--border);
-      margin-top: 22px;
-      color: var(--muted2);
-      font-size: 12px;
-    }
-    .foot{
-      display:flex;
-      justify-content:space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-      align-items:center;
-    }
-
-    /* Responsive */
-    @media (max-width: 980px){
-      .hero-grid{ grid-template-columns: 1fr; }
-      h1{ font-size: 36px; }
-      .hero-card .ph{ height: 240px; }
-    }
-    @media (max-width: 860px){
-      .nav, .cta{ display:none; }
-      .burger{ display:inline-flex; align-items:center; justify-content:center; }
-      .cards{ grid-template-columns: 1fr; }
-      .split{ grid-template-columns: 1fr; }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
-  <!-- HEADER (auto-hide) -->
-  <header class="header" id="siteHeader">
-    <div class="container">
-      <div class="header-inner">
-        <a class="brand" href="index.html" aria-label="AS Vias Engenharia - Início">
-          <img src="LOGO.png" alt="AS Vias Engenharia" />
-          <div class="brand-title">
-            <strong>AS Vias</strong>
-            <span>Engenharia</span>
-          </div>
-        </a>
 
-        <!-- Desktop nav (páginas separadas) -->
-        <nav class="nav" aria-label="Menu principal">
-          <a href="index.html">Início</a>
-          <a href="servicos.html">Serviços</a>
-          <a href="projetos.html">Projetos</a>
-          <a href="normas.html">Normas e ANTT</a>
-          <a href="sobre.html">Sobre</a>
-          <a href="contato.html">Contato</a>
-        </nav>
-
-        <div class="cta">
-          <a class="btn btn-ghost" href="projetos.html">Ver Projetos</a>
-          <a class="btn btn-primary" href="https://wa.me/55SEUNUMEROAQUI" target="_blank" rel="noreferrer">WhatsApp</a>
-        </div>
-
-        <!-- Mobile button -->
-        <button class="burger" id="openDrawer" aria-label="Abrir menu">
-          ☰
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <div class="spacer"></div>
-
-  <!-- Mobile Drawer -->
-  <div class="drawer-overlay" id="drawerOverlay" aria-hidden="true"></div>
-  <aside class="drawer" id="drawer" aria-label="Menu mobile">
-    <div class="drawer-head">
-      <div class="brand" style="min-width:auto;">
+<header class="header" id="siteHeader">
+  <div class="container">
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="AS Vias Engenharia - Início">
         <img src="LOGO.png" alt="AS Vias Engenharia" />
         <div class="brand-title">
           <strong>AS Vias</strong>
           <span>Engenharia</span>
         </div>
+      </a>
+
+      <nav class="nav" aria-label="Menu principal">
+        <a href="index.html">Início</a>
+        <a href="servicos.html">Serviços</a>
+        <a href="projetos.html">Projetos</a>
+        <a href="normas.html">Normas e ANTT</a>
+        <a href="sobre.html">Sobre</a>
+        <a href="contato.html">Contato</a>
+      </nav>
+
+      <div class="cta">
+        <a class="btn btn-ghost" href="projetos.html">Ver Projetos</a>
+        <a class="btn btn-primary" href="https://wa.me/5546991281462" target="_blank" rel="noreferrer">WhatsApp</a>
       </div>
-      <button class="drawer-close" id="closeDrawer" aria-label="Fechar menu">✕</button>
+
+      <button class="burger" id="openDrawer" aria-label="Abrir menu">☰</button>
     </div>
+  </div>
+</header>
 
-    <nav>
-      <a href="index.html">Início</a>
-      <a href="servicos.html">Serviços</a>
-      <a href="projetos.html">Projetos</a>
-      <a href="normas.html">Normas e ANTT</a>
-      <a href="sobre.html">Sobre</a>
-      <a href="contato.html">Contato</a>
-    </nav>
+<div class="spacer"></div>
 
-    <a class="btn btn-primary" style="width:100%; margin-top:8px;"
-       href="https://wa.me/55SEUNUMEROAQUI" target="_blank" rel="noreferrer">
-      Falar no WhatsApp
-    </a>
+<div class="drawer-overlay" id="drawerOverlay" aria-hidden="true"></div>
+<aside class="drawer" id="drawer" aria-label="Menu mobile">
+  <div class="drawer-head">
+    <div class="brand" style="min-width:auto;">
+      <img src="LOGO.png" alt="AS Vias Engenharia" />
+      <div class="brand-title">
+        <strong>AS Vias</strong>
+        <span>Engenharia</span>
+      </div>
+    </div>
+    <button class="drawer-close" id="closeDrawer" aria-label="Fechar menu">✕</button>
+  </div>
 
-    <p style="margin:14px 2px 0; color: var(--muted2); font-size:12px;">
-      Projetos viários com precisão técnica e conformidade normativa.
-    </p>
-  </aside>
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="servicos.html">Serviços</a>
+    <a href="projetos.html">Projetos</a>
+    <a href="normas.html">Normas e ANTT</a>
+    <a href="sobre.html">Sobre</a>
+    <a href="contato.html">Contato</a>
+  </nav>
 
-  <!-- HERO -->
-  <main>
-    <section class="hero">
-      <div class="container">
-        <div class="hero-grid">
-          <div>
-            <div class="kicker">
-              <span class="dot"></span>
-              Infraestrutura viária • Acessos • Pavimentação • Regularização
-            </div>
+  <a class="btn btn-primary" style="width:100%; margin-top:8px;"
+     href="https://wa.me/5546991281462" target="_blank" rel="noreferrer">
+    Falar no WhatsApp
+  </a>
 
-            <h1>Projetos de Infraestrutura Viária<br/>com precisão e conformidade</h1>
+  <p style="margin:14px 2px 0; color: var(--muted2); font-size:12px;">
+    Projetos viários com precisão técnica e conformidade normativa.
+  </p>
+</aside>
 
-            <p class="sub">
-              Atuamos com projetos de acessos rodoviários, pavimentação urbana e rural e regularização fundiária,
-              com foco em atendimento normativo (DNIT, DER e ANTT) e clareza técnica para facilitar a tomada de decisão.
-            </p>
-
-            <div class="hero-actions">
-              <a class="btn btn-primary" href="servicos.html">Ver Serviços</a>
-              <a class="btn btn-ghost" href="contato.html">Solicitar Proposta</a>
-            </div>
+<main>
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <div class="kicker">
+            <span class="dot"></span>
+            Infraestrutura viária • Acessos • Pavimentação • Regularização
           </div>
 
-          <div class="hero-card">
-            <div class="ph" title="Imagem de capa (trocar por foto real sua)"></div>
-            <div class="meta">
-              <strong>AS Vias Engenharia</strong>
-              <span>Projetos viários com organização, precisão e foco em aprovação.</span>
-            </div>
-          </div>
+          <h1>Projetos de Infraestrutura Viária<br/>com precisão e conformidade</h1>
 
+          <p class="sub">
+            Desenvolvemos projetos de acessos rodoviários, pavimentação urbana e rural e regularização fundiária,
+            com foco em atendimento normativo (DNIT, DER e ANTT) e linguagem clara para facilitar decisões.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="servicos.html">Ver Serviços</a>
+            <a class="btn btn-ghost" href="contato.html">Solicitar Proposta</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="ph" title="Trocar por foto real sua (drone/rodovia)"></div>
+          <div class="meta">
+            <strong>AS Vias Engenharia</strong>
+            <span>Projetos viários com organização, precisão e foco em aprovação.</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-title">
+        <h2>Serviços</h2>
+        <p>Visão geral. Em “Serviços” detalhamos escopo, entregáveis e etapas.</p>
+      </div>
+
+      <div class="cards">
+        <div class="card">
+          <div class="tag"><i></i> Acessos Rodoviários</div>
+          <h3>Projetos e adequações</h3>
+          <p>Estudos, geometria, drenagem e sinalização conforme exigências de órgãos e concessionárias.</p>
+        </div>
+
+        <div class="card">
+          <div class="tag"><i></i> Pavimentação</div>
+          <h3>Urbana e rural</h3>
+          <p>Dimensionamento, reforço estrutural e soluções compatíveis com a realidade do empreendimento.</p>
+        </div>
+
+        <div class="card">
+          <div class="tag"><i></i> Georreferenciamento</div>
+          <h3>Regularização fundiária</h3>
+          <p>Levantamento e documentação técnica para INCRA/SIGEF e demandas de cartório.</p>
         </div>
       </div>
-    </section>
 
-    <!-- SERVIÇOS (resumo) -->
-    <section>
-      <div class="container">
-        <div class="section-title">
-          <h2>Serviços</h2>
-          <p>Visão geral do que entregamos. Na página de serviços, detalhamos escopo, etapas e documentos.</p>
+      <div style="margin-top:14px;">
+        <a class="btn btn-ghost" href="servicos.html">Ver detalhes dos serviços →</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-title">
+        <h2>Como trabalhamos</h2>
+        <p>Processo objetivo, com foco em viabilidade técnica e conformidade normativa.</p>
+      </div>
+
+      <div class="split">
+        <div class="panel">
+          <p><strong>1) Entendimento do cenário</strong><br/>
+            Analisamos objetivo, localização, restrições e exigências do órgão/concessionária.
+          </p>
+          <ul>
+            <li>Levantamentos e base cartográfica</li>
+            <li>Verificação de normas aplicáveis</li>
+            <li>Definição de escopo e etapas</li>
+          </ul>
         </div>
 
-        <div class="cards">
-          <div class="card">
-            <div class="tag"><i></i> Acessos Rodoviários</div>
-            <h3>Projetos e adequações</h3>
-            <p>Estudos, geometria, drenagem e sinalização conforme exigências de órgãos e concessionárias.</p>
-          </div>
-
-          <div class="card">
-            <div class="tag"><i></i> Pavimentação</div>
-            <h3>Urbana e rural</h3>
-            <p>Dimensionamento, reforço estrutural e soluções compatíveis com a realidade do empreendimento.</p>
-          </div>
-
-          <div class="card">
-            <div class="tag"><i></i> Georreferenciamento</div>
-            <h3>Regularização fundiária</h3>
-            <p>Levantamento e documentação técnica para INCRA/SIGEF e demandas de cartório.</p>
-          </div>
-        </div>
-
-        <div style="margin-top:14px;">
-          <a class="btn btn-ghost" href="servicos.html">Ver detalhes dos serviços →</a>
+        <div class="panel">
+          <p><strong>2) Desenvolvimento técnico</strong><br/>
+            Entregamos projeto com documentação organizada e linguagem clara, sem perder precisão.
+          </p>
+          <ul>
+            <li>Geometria, drenagem, sinalização</li>
+            <li>Memoriais, pranchas e compatibilização</li>
+            <li>Suporte para aprovações e ajustes</li>
+          </ul>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- DIFERENCIAIS (sem números, como você pediu) -->
-    <section>
-      <div class="container">
-        <div class="section-title">
-          <h2>Como trabalhamos</h2>
-          <p>Processo claro e objetivo, com foco em viabilidade técnica e conformidade normativa.</p>
+  <section>
+    <div class="container">
+      <div class="panel" style="display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;">
+        <div>
+          <div style="font-weight:800; letter-spacing:-.2px;">Precisa de um projeto para aprovação?</div>
+          <div style="color:var(--muted); font-size:13px;">Fale com a AS Vias e receba uma orientação inicial do melhor caminho técnico.</div>
         </div>
+        <a class="btn btn-primary" href="contato.html">Entrar em contato</a>
+      </div>
+    </div>
+  </section>
 
-        <div class="split">
-          <div class="panel">
-            <p><strong>1) Entendimento do cenário</strong><br/>
-              Analisamos objetivo, localização, restrições e exigências do órgão/concessionária.
-            </p>
-            <ul>
-              <li>Levantamentos e base cartográfica</li>
-              <li>Verificação de normas aplicáveis</li>
-              <li>Definição de escopo e etapas</li>
-            </ul>
-          </div>
-
-          <div class="panel">
-            <p><strong>2) Desenvolvimento técnico</strong><br/>
-              Entregamos projeto com documentação organizada e linguagem clara, sem perder precisão.
-            </p>
-            <ul>
-              <li>Geometria, drenagem, sinalização</li>
-              <li>Memoriais, pranchas e compatibilização</li>
-              <li>Suporte para aprovações e ajustes</li>
-            </ul>
-          </div>
+  <footer>
+    <div class="container">
+      <div class="foot">
+        <div>© <span id="year"></span> AS Vias Engenharia</div>
+        <div style="display:flex; gap:14px; flex-wrap:wrap;">
+          <a href="contato.html" style="color:var(--muted);">Contato</a>
+          <a href="servicos.html" style="color:var(--muted);">Serviços</a>
+          <a href="projetos.html" style="color:var(--muted);">Projetos</a>
         </div>
       </div>
-    </section>
+    </div>
+  </footer>
+</main>
 
-    <!-- CTA -->
-    <section>
-      <div class="container">
-        <div class="panel" style="display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;">
-          <div>
-            <div style="font-weight:800; letter-spacing:-.2px;">Precisa de um projeto para aprovação?</div>
-            <div style="color:var(--muted); font-size:13px;">Fale com a AS Vias e receba uma orientação inicial do melhor caminho técnico.</div>
-          </div>
-          <a class="btn btn-primary" href="contato.html">Entrar em contato</a>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <div class="container">
-        <div class="foot">
-          <div>© <span id="year"></span> AS Vias Engenharia</div>
-          <div style="display:flex; gap:14px; flex-wrap:wrap;">
-            <a href="contato.html" style="color:var(--muted);">Contato</a>
-            <a href="servicos.html" style="color:var(--muted);">Serviços</a>
-            <a href="projetos.html" style="color:var(--muted);">Projetos</a>
-          </div>
-        </div>
-      </div>
-    </footer>
-  </main>
-
-  <script>
-    // Ano automático
-    document.getElementById("year").textContent = new Date().getFullYear();
-
-    // Drawer mobile
-    const openDrawerBtn = document.getElementById("openDrawer");
-    const closeDrawerBtn = document.getElementById("closeDrawer");
-    const drawerOverlay = document.getElementById("drawerOverlay");
-    const drawer = document.getElementById("drawer");
-
-    function openDrawer(){
-      drawer.classList.add("open");
-      drawerOverlay.classList.add("open");
-      drawerOverlay.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
-    }
-    function closeDrawer(){
-      drawer.classList.remove("open");
-      drawerOverlay.classList.remove("open");
-      drawerOverlay.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
-    }
-
-    openDrawerBtn.addEventListener("click", openDrawer);
-    closeDrawerBtn.addEventListener("click", closeDrawer);
-    drawerOverlay.addEventListener("click", closeDrawer);
-    window.addEventListener("keydown", (e)=>{ if(e.key === "Escape") closeDrawer(); });
-
-    // Header auto-hide (some ao descer, reaparece ao subir)
-    const header = document.getElementById("siteHeader");
-    let lastY = window.scrollY;
-    let ticking = false;
-
-    window.addEventListener("scroll", () => {
-      if (ticking) return;
-      ticking = true;
-
-      window.requestAnimationFrame(() => {
-        const y = window.scrollY;
-        const delta = y - lastY;
-
-        const nearTop = y < 24;
-        const goingDown = delta > 6;
-        const goingUp = delta < -6;
-
-        // se drawer aberto, mantém header visível
-        const drawerOpen = drawer.classList.contains("open");
-
-        if (drawerOpen || nearTop) header.classList.remove("hide");
-        else if (goingDown) header.classList.add("hide");
-        else if (goingUp) header.classList.remove("hide");
-
-        lastY = y;
-        ticking = false;
-      });
-    }, { passive: true });
-  </script>
+<script src="main.js"></script>
 </body>
 </html>
