@@ -47,7 +47,7 @@ img{ max-width:100%; display:block; }
   left:0; right:0; top:0;
   z-index: 50;
   border-bottom: 1px solid var(--border);
-  background: rgba(7,10,18,.72);
+  background: rgba(5,10,20,.90);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   transform: translateY(0);
@@ -56,11 +56,11 @@ img{ max-width:100%; display:block; }
 .header.hide{ transform: translateY(-100%); }
 
 .header-inner{
-  height: 68px;
+  height: 110px;   /* agora fica grande mesmo */
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap: 14px;
+  gap: 30px;
 }
 .header::after{
   content:"";
@@ -74,18 +74,19 @@ img{ max-width:100%; display:block; }
 .brand{
   display:flex;
   align-items:center;
-  gap:12px;
-  padding: 8px 10px;
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,.10);
-  background: rgba(255,255,255,.03);
-  transition: border-color .15s ease, background .15s ease;
+  gap:16px;
+  padding: 0;
+  border: none;
+  background: transparent;
 }
 .brand:hover{
   border-color: rgba(96,165,250,.25);
   background: rgba(255,255,255,.05);
 }
-.brand img{ height:54px; width:auto; }
+.brand img{
+  height: 88px;
+  width: auto;
+}
 .brand-title{
   display:flex;
   flex-direction:column;
@@ -97,13 +98,12 @@ img{ max-width:100%; display:block; }
 .nav{
   display:flex;
   align-items:center;
-  gap: 22px;
+  gap: 36px;   /* mais espaço entre itens */
 }
+
 .nav a{
-  font-size: 13px;
-  color: var(--muted);
-  padding: 10px 2px;
-  transition: color .15s ease;
+  font-size: 15px;
+  font-weight: 500;
 }
 .nav a:hover{ color: var(--text); }
 
@@ -213,7 +213,7 @@ img{ max-width:100%; display:block; }
 }
 
 /* spacing for fixed header */
-.spacer{ height: 68px; }
+.spacer{ height: 110px; }
 
 /* HERO */
 .hero{ padding: 64px 0 34px; }
