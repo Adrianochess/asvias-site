@@ -284,6 +284,24 @@ img{ max-width:100%; display:block; }
 .spacer{ height: 160px; }
 
 /* HERO */
+
+.hero-bg{
+  position: relative;
+  min-height: 640px;
+  display: flex;
+  align-items: center;
+
+  background:
+    linear-gradient(to right, rgba(5,15,35,.85), rgba(5,15,35,.55)),
+    url("img/obra-hero.jpg") center/cover no-repeat;
+
+  color: #fff;
+}
+
+.hero-content{
+  max-width: 680px;
+}
+
 .hero{ padding: 64px 0 34px; }
 .hero-grid{
   display:grid;
