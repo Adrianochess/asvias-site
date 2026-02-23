@@ -572,3 +572,29 @@ footer{
   .header-inner.header-overlay{ height: 86px; }
   .brand img{ height: 56px; }
 }
+
+/* ===== FUNDO MODERNO ABAIXO DO HERO ===== */
+
+.section-modern{
+  position: relative;
+  padding: 110px 0;
+
+  background:
+    radial-gradient(
+      circle at 20% 25%,
+      rgba(46,91,251,0.30),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 85% 75%,
+      rgba(30,58,138,0.35),
+      transparent 50%
+    ),
+    linear-gradient(
+      135deg,
+      #0a1b32,
+      #081426
+    );
+
+  color: #ffffff;
+}
