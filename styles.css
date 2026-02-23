@@ -43,19 +43,14 @@ img{ max-width:100%; display:block; }
 
 /* HEADER auto-hide */
 .header{
-  position: fixed;
-  left:0; right:0; top:0;
-  z-index: 50;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
 
-  background: rgba(255,255,255,.96);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-
-  border-bottom: 1px solid rgba(15,23,42,.12);
-  box-shadow: 0 10px 30px rgba(0,0,0,.18);
-
-  transform: translateY(0);
-  transition: transform .28s ease;
+  background: transparent;
+  box-shadow: none;
 }
 .header.hide{ transform: translateY(-100%); }
 
@@ -108,9 +103,8 @@ img{ max-width:100%; display:block; }
   color: rgba(2,6,23,.95);
 }
 
-/* spacer precisa acompanhar header maior */
 .spacer{
-  height: 220px;               /* ajuste conforme altura da logo */
+  height: 0;
 }
 
 /* mobile: esconde menu linha 2 e mantém hamburger */
@@ -142,7 +136,7 @@ img{ max-width:100%; display:block; }
   background: rgba(255,255,255,.05);
 }
 .brand img{
-  height: 260px;
+  height: 110px;   /* pode testar 90 / 100 / 110 */
   width: auto;
 }
 .brand-title{
@@ -166,13 +160,11 @@ img{ max-width:100%; display:block; }
   gap: 55px;                   /* mais espaço = mais premium */
 }
 .nav a{
-  font-size: 18px;
+  color: #ffffff;
   font-weight: 600;
-  color: rgba(2,6,23,.75);
-  transition: color .15s ease;
 }
 .nav a:hover{
-  color: rgba(2,6,23,.95);
+  color: #2E5BFB; /* azul da marca */
 }
 
 .cta{
@@ -204,9 +196,8 @@ img{ max-width:100%; display:block; }
 }
 .btn-primary:hover{ background: #2f6cff; }
 .btn-ghost{
-  background: transparent;
-  border-color: rgba(2,6,23,.18);
-  color: rgba(2,6,23,.85);
+  border: 1px solid #ffffff;
+  color: #ffffff;
 }
 .btn-ghost:hover{ border-color: rgba(2,6,23,.30); }
 
