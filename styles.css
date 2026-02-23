@@ -157,7 +157,7 @@ img{ max-width:100%; display:block; }
 .nav{
   display:flex;
   align-items:center;
-  gap: 55px;                   /* mais espaço = mais premium */
+  gap: 32px;                   /* mais espaço = mais premium */
 }
 .nav a{
   color: #ffffff;
