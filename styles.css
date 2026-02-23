@@ -41,82 +41,26 @@ img{ max-width:100%; display:block; }
   padding: 0 18px;
 }
 
-/* HEADER auto-hide */
+/* =========================
+   HEADER OVERLAY (1 linha)
+   ========================= */
 .header{
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+  top: 0; left: 0; right: 0;
   z-index: 1000;
-
   background: transparent;
   box-shadow: none;
-}
-.header.hide{ transform: translateY(-100%); }
-
-.header-inner{
-  height: 160px;              /* era 68/92/110 - agora grande mesmo */
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap: 34px;
+  border: 0;
 }
 
-/* ===== HEADER 2 LINHAS (logo grande) ===== */
-.header-inner.header-tall{
-  height: auto;                 /* ignora o height do .header-inner normal */
-  padding: 14px 0 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.header-top{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-}
-
-/* logo grande */
-.brand img{
-  height: 180px;
-  width: auto;
-  border-radius: 16px;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
-}
-
-/* menu na segunda linha */
-.nav.nav-row{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 46px;
-  padding-bottom: 6px;
-}
-
-.nav.nav-row a{
-  font-size: 18px;
-  font-weight: 600;
-  color: rgba(2,6,23,.72);
-}
-
-.nav.nav-row a:hover{
-  color: rgba(2,6,23,.95);
-}
-
-.spacer{
-  height: 0;
-}
-
-/* mobile: esconde menu linha 2 e mantém hamburger */
-@media (max-width: 860px){
-  .nav.nav-row{ display:none; }
-  .cta{ display:none; }
-  .burger{ display:inline-flex; }
-
-  .brand img{ height: 120px; }
-  .spacer{ height: 180px; }
+/* leve degradê pra leitura no topo, sem “apagar” a imagem */
+.header::before{
+  content:"";
+  position:absolute;
+  left:0; right:0; top:0;
+  height: 150px;
+  background: linear-gradient(to bottom, rgba(3,10,25,.28), rgba(3,10,25,0));
+  pointer-events:none;
 }
 
 .header::after{
@@ -124,55 +68,53 @@ img{ max-width:100%; display:block; }
   position:absolute;
   left:0; right:0; bottom:0;
   height:1px;
-  background: linear-gradient(90deg, transparent, rgba(37,99,235,.35), transparent);
+  background: linear-gradient(90deg, transparent, rgba(37,99,235,.28), transparent);
   pointer-events:none;
 }
 
+.header-inner{
+  position: relative;
+  height: 190px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 18px;
+}
+
+/* Logo grande com cantos arredondados */
 .brand{
   display:flex;
   align-items:center;
-  padding: 0;
-}
-.brand:hover{
-  border-color: rgba(96,165,250,.25);
-  background: rgba(255,255,255,.05);
 }
 .brand img{
-  height: 110px;   /* pode testar 90 / 100 / 110 */
+  height: 180px;
   width: auto;
-}
-.brand-title{
-  display:flex;
-  flex-direction:column;
-  line-height:1.05;
-}
-.brand-title strong{ 
-  font-size: 18px;
-  letter-spacing: .2px;
-  color: rgba(2,6,23,.92);     /* preto/azul bem escuro */
-}
-.brand-title span{
-  font-size: 13px;
-  color: rgba(2,6,23,.60);
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
 }
 
+/* menu central */
 .nav{
   display:flex;
   align-items:center;
-  gap: 32px;                   /* mais espaço = mais premium */
+  justify-content:center;
+  gap: 32px;
+  flex: 1;
 }
 .nav a{
-  color: #ffffff;
+  color: rgba(255,255,255,.92);
   font-weight: 600;
+  text-shadow: 0 2px 12px rgba(0,0,0,.35);
 }
 .nav a:hover{
-  color: #2E5BFB; /* azul da marca */
+  color: rgba(255,255,255,1);
 }
 
+/* CTA direita */
 .cta{
   display:flex;
   align-items:center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .btn{
@@ -197,11 +139,16 @@ img{ max-width:100%; display:block; }
   color: #fff;
 }
 .btn-primary:hover{ background: #2f6cff; }
+
 .btn-ghost{
-  border: 1px solid #ffffff;
-  color: #ffffff;
+  background: rgba(0,0,0,.12);
+  border: 1px solid rgba(255,255,255,.35);
+  color: rgba(255,255,255,.95);
+  backdrop-filter: blur(6px);
 }
-.btn-ghost:hover{ border-color: rgba(2,6,23,.30); }
+.btn-ghost:hover{
+  border-color: rgba(255,255,255,.55);
+}
 
 /* Mobile */
 .burger{
@@ -209,12 +156,12 @@ img{ max-width:100%; display:block; }
   height:48px;
   width:48px;
   border-radius: 14px;
-  background: transparent;
-  border: 1px solid rgba(2,6,23,.18);
-  color: rgba(2,6,23,.85);
+  background: rgba(0,0,0,.10);
+  border: 1px solid rgba(255,255,255,.18);
+  color: rgba(255,255,255,.92);
   cursor:pointer;
 }
-.burger:hover{ border-color: rgba(2,6,23,.30); }
+.burger:hover{ border-color: rgba(255,255,255,.30); }
 
 .drawer-overlay{
   position:fixed;
@@ -254,7 +201,6 @@ img{ max-width:100%; display:block; }
   color: var(--text);
   cursor:pointer;
 }
-
 .drawer nav{
   display:flex;
   flex-direction:column;
@@ -273,93 +219,55 @@ img{ max-width:100%; display:block; }
   background: rgba(255,255,255,.04);
 }
 
-/* spacing for fixed header */
-.spacer{ height: 160px; }
-
-/* HERO */
-
+/* =========================
+   HERO (mais claro + clean)
+   ========================= */
 .hero-bg{
   position: relative;
   min-height: 640px;
   display: flex;
   align-items: center;
 
+  /* MENOS escuro = mais brilho/vida na imagem */
   background:
-    linear-gradient(to right, rgba(5,15,35,.45), rgba(5,15,35,.25)),
+    linear-gradient(to bottom, rgba(0,0,0,.10), rgba(0,0,0,.16)),
     url("img/obra-hero.jpg") center/cover no-repeat;
 
   color: #fff;
 }
 
-.hero-content{
-  max-width: 680px;
+/* dá “brilho” sem mexer no texto (leve e moderno) */
+.hero-bg::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: radial-gradient(circle at 35% 35%, rgba(255,255,255,.10), transparent 55%);
+  pointer-events:none;
+}
+.hero-bg > *{ position: relative; z-index: 1; }
+
+.hero{ padding-top: 120px; } /* ajuste fino se precisar */
+
+.hero-content{ max-width: 900px; margin: 0 auto; text-align: center; }
+.hero-clean{ padding-top: 120px; }
+
+.hero-slogan{
+  font-weight: 800;
+  font-size: clamp(34px, 4.4vw, 70px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: rgba(255,255,255,0.96);
+  text-shadow: 0 18px 55px rgba(0,0,0,0.40);
 }
 
-.hero{ padding-top: 120px; } /* para não ficar escondido atrás do header */
-.hero-grid{
-  display:grid;
-  grid-template-columns: 1.2fr .8fr;
-  gap: 26px;
-  align-items: center;
-}
-.kicker{
-  display:inline-flex;
-  gap:10px;
-  align-items:center;
-  color: var(--muted);
-  font-size: 12px;
-  border: 1px solid rgba(255,255,255,.10);
-  background: rgba(255,255,255,.03);
-  padding: 8px 12px;
-  border-radius: 999px;
-  width: fit-content;
-}
-.dot{
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: var(--blue3);
-  box-shadow: 0 0 0 4px rgba(96,165,250,.15);
-}
+/* esconda elementos antigos do hero (caso ainda existam no HTML) */
+.kicker, .sub, .hero-actions, .hero-card { display:none !important; }
 
-h1{
-  margin: 14px 0 10px;
-  font-size: 42px;
-  line-height: 1.1;
-  letter-spacing: -0.6px;
-}
-.sub{
-  margin: 0 0 18px;
-  color: var(--muted);
-  font-size: 15px;
-  max-width: 58ch;
-}
-.hero-actions{
-  display:flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 6px;
-}
-
-.hero-card{
-  border: 1px solid var(--border);
-  background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
-  border-radius: var(--radius);
-  overflow:hidden;
-  box-shadow: var(--shadow);
-}
-.hero-card .ph{
-  height: 260px;
-  background:
-    linear-gradient(180deg, rgba(0,0,0,.0), rgba(0,0,0,.55)),
-    url("https://images.unsplash.com/photo-1523413651479-597eb2da0ad6?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;
-  /* TROQUE por sua foto real depois */
-}
-.hero-card .meta{ padding: 14px 14px 16px; }
-.meta strong{ display:block; font-size: 13px; }
-.meta span{ display:block; font-size: 12px; color: var(--muted2); margin-top: 4px; }
-
-/* SECTIONS */
+/* =========================
+   SECTIONS / CARDS / SPLIT
+   ========================= */
 section{ padding: 34px 0; }
+
 .section-title{
   display:flex;
   align-items:flex-end;
@@ -407,6 +315,7 @@ section{ padding: 34px 0; }
   color: var(--muted);
   font-size: 13px;
 }
+
 .tag{
   display:inline-flex;
   gap:8px;
@@ -444,7 +353,22 @@ section{ padding: 34px 0; }
 }
 .panel li{ margin: 6px 0; }
 
-/* FOOTER */
+/* =========================
+   FUNDO MODERNO (abaixo hero)
+   ========================= */
+.section-modern{
+  position: relative;
+  padding: 110px 0;
+  background:
+    radial-gradient(circle at 20% 25%, rgba(46,91,251,0.30), transparent 45%),
+    radial-gradient(circle at 85% 75%, rgba(30,58,138,0.35), transparent 50%),
+    linear-gradient(135deg, #0a1b32, #081426);
+  color: #ffffff;
+}
+
+/* =========================
+   FOOTER
+   ========================= */
 footer{
   padding: 26px 0 40px;
   border-top: 1px solid var(--border);
@@ -460,179 +384,33 @@ footer{
   align-items:center;
 }
 
-/* Page header */
+/* =========================
+   PÁGINAS INTERNAS
+   ========================= */
 .pagehead{
-  padding: 44px 0 18px;
+  padding: 220px 0 18px;
 }
-.pagehead h1{
-  font-size: 34px;
-  margin: 0 0 8px;
-}
-.pagehead p{
-  margin:0;
-  color: var(--muted);
-  max-width: 70ch;
-}
-
-/* Responsive */
-@media (max-width: 980px){
-  .hero-grid{ grid-template-columns: 1fr; }
-  h1{ font-size: 36px; }
-  .hero-card .ph{ height: 240px; }
-}
-@media (max-width: 860px){
-  .nav, .cta{ display:none; }
-  .burger{ display:inline-flex; align-items:center; justify-content:center; }
-  .cards{ grid-template-columns: 1fr; }
-  .split{ grid-template-columns: 1fr; }
-}
-
-/* ===== HEADER OVERLAY (transparente sobre a imagem) ===== */
-.header{
-  position: absolute; /* fica por cima do hero */
-  top: 0; left: 0; right: 0;
-  z-index: 1000;
-  background: transparent;
-  box-shadow: none;
-  border: 0;
-}
-
-/* Um leve degradê só para dar leitura, sem “tapar” a imagem */
-.header::before{
-  content:"";
-  position:absolute;
-  left:0; right:0; top:0;
-  height: 130px;
-  background: linear-gradient(to bottom, rgba(3,10,25,.40), rgba(3,10,25,0));
-  pointer-events:none;
-}
-
-/* Linha única: logo esquerda, menu centro, CTA direita */
-.header-inner.header-overlay{
-  position: relative; /* por causa do ::before */
-  height: 200px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-}
-
-/* Logo menor (ajuste fino aqui) */
-.brand img{
-  height: 180px;
-  width: auto;
-  display:block;
-}
-
-/* Menu centralizado e com boa leitura */
-.nav{
-  display: flex;
-  align-items: center;
-  gap: 32px;
-  justify-content: center;
-  flex: 1;              /* empurra o CTA pro canto direito */
-}
-
-/* Texto do menu mais visível */
-.nav a{
-  color: rgba(255,255,255,.92);
-  font-weight: 600;
-  text-shadow: 0 2px 12px rgba(0,0,0,.45);
-}
-.nav a:hover{
-  color: rgba(255,255,255,1);
-}
-
-/* CTA no canto superior direito (alinhado com o menu) */
-.cta{
-  display:flex;
-  align-items:center;
-  gap: 12px;
-}
-
-/* Botão ghost pra fundo de imagem */
-.btn-ghost{
-  background: rgba(0,0,0,.15);
-  border: 1px solid rgba(255,255,255,.35);
-  color: rgba(255,255,255,.95);
-  backdrop-filter: blur(6px);
-}
-.btn-ghost:hover{
-  border-color: rgba(255,255,255,.55);
-}
-
-/* Remove spacer (se você ainda tiver) */
-.spacer{ height: 0 !important; }
-
-/* Mobile: esconde nav e CTA e usa hamburger */
-@media (max-width: 980px){
-  .nav{ display:none; }
-  .cta{ display:none; }
-  .burger{ display:inline-flex; }
-  .header-inner.header-overlay{ height: 86px; }
-  .brand img{ height: 56px; }
-}
-
-/* ===== FUNDO MODERNO ABAIXO DO HERO ===== */
-
-.section-modern{
-  position: relative;
-  padding: 110px 0;
-
-  background:
-    radial-gradient(
-      circle at 20% 25%,
-      rgba(46,91,251,0.30),
-      transparent 45%
-    ),
-    radial-gradient(
-      circle at 85% 75%,
-      rgba(30,58,138,0.35),
-      transparent 50%
-    ),
-    linear-gradient(
-      135deg,
-      #0a1b32,
-      #081426
-    );
-
-  color: #ffffff;
-}
-
-/* ===== PÁGINAS INTERNAS (conteúdo começa abaixo do header overlay) ===== */
-.pagehead{
-  padding: 220px 0 18px;  /* ajuste se sua logo/header estiver maior */
-}
-
 .pagehead h1{
   margin: 0 0 8px;
   font-size: 34px;
   color: rgba(255,255,255,.92);
 }
-
 .pagehead p{
   margin: 0;
   color: rgba(255,255,255,.72);
   max-width: 70ch;
 }
 
-/* ===== HERO CLEAN (só slogan) ===== */
-.hero-clean{
-  max-width: 900px;
-  margin: 0 auto;
-  text-align: center;
-  padding-top: 120px; /* ajuste caso o header esteja alto */
-}
+/* =========================
+   RESPONSIVO
+   ========================= */
+@media (max-width: 980px){
+  .cards{ grid-template-columns: 1fr; }
+  .split{ grid-template-columns: 1fr; }
+  .nav, .cta{ display:none; }
+  .burger{ display:inline-flex; align-items:center; justify-content:center; }
 
-.hero-slogan{
-  font-weight: 800;
-  font-size: clamp(34px, 4.2vw, 68px);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  color: rgba(255,255,255,0.95);
-  text-shadow: 0 18px 55px rgba(0,0,0,0.45);
+  .header-inner{ height: 120px; }
+  .brand img{ height: 90px; }
+  .pagehead{ padding-top: 160px; }
 }
-
-/* remove badge/btn se ainda existir espaço */
-.hero-actions{ display:none; }
-.badge{ display:none; }
