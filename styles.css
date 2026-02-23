@@ -224,14 +224,15 @@ img{ max-width:100%; display:block; }
    ========================= */
 .hero-bg{
   position: relative;
-  min-height: 640px;
+  height: 100vh;          /* ocupa 100% da altura da tela */
+  min-height: 720px;      /* garante impacto em telas grandes */
   display: flex;
   align-items: center;
+  justify-content: center;
 
-  /* MENOS escuro = mais brilho/vida na imagem */
   background:
-    linear-gradient(to bottom, rgba(0,0,0,.10), rgba(0,0,0,.16)),
-    url("img/obra-hero.jpg") center/cover no-repeat;
+    linear-gradient(to bottom, rgba(0,0,0,.08), rgba(0,0,0,.15)),
+    url("img/obra-hero.jpg") center center / cover no-repeat;
 
   color: #fff;
 }
